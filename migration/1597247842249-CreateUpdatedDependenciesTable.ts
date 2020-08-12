@@ -1,8 +1,9 @@
 import { MigrationInterface, QueryRunner, Table, TableColumn, TableForeignKey } from 'typeorm';
 
-export class CreateAccountTable1597065398011 implements MigrationInterface {
-  private readonly table: string = 'account';
-  private readonly companyTable: string = 'company';
+export class CreateUpdatedDependenciesTable1597247842249 implements MigrationInterface {
+  private readonly table: string = 'updatedDependencies';
+  private readonly branchesTable: string = 'branches';
+  private readonly repositoriesTable: string = 'repositories';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
@@ -17,54 +18,47 @@ export class CreateAccountTable1597065398011 implements MigrationInterface {
             generationStrategy: 'increment'
           }),
           new TableColumn({
-            name: 'uuid',
-            type: 'char',
-            length: '36',
-            isNullable: false
-          }),
-          new TableColumn({
-            name: 'firstName',
+            name: 'name',
             type: 'char',
             length: '255',
             isNullable: false
           }),
           new TableColumn({
-            name: 'lastName',
+            name: 'value',
             type: 'char',
             length: '255',
-            isNullable: false
+            isNullable: true
           }),
           new TableColumn({
-            name: 'email',
-            type: 'char',
-            length: '255',
-            isNullable: false,
-            isUnique: true
-          }),
-          new TableColumn({
-            name: 'role',
-            type: 'enum',
-            isNullable: false,
-            default: "'member'",
-            enum: [ 'member', 'owner' ]
-          }),
-          new TableColumn({
-            name: 'companyId',
+            name: 'repositoryId',
             type: 'int',
             isNullable: false
-          })
+          }),
+          new TableColumn({
+            name: 'branchId',
+            type: 'int',
+            isNullable: false
+          }),
         ],
         foreignKeys: [
           new TableForeignKey({
-            name: `${this.table}-${this.companyTable}`,
-            columnNames: ['companyId'],
-            referencedTableName: this.companyTable,
+            name: `${this.table}-${this.repositoriesTable}`,
+            columnNames: ['repositoryId'],
+            referencedTableName: this.repositoriesTable,
             referencedColumnNames: ['id'],
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
-          })
+          }),
+          new TableForeignKey({
+            name: `${this.table}-${this.branchesTable}`,
+            columnNames: ['branchId'],
+            referencedTableName: this.branchesTable,
+            referencedColumnNames: ['id'],
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
+          }),
         ]
-      }),
+      })
     );
   }
 

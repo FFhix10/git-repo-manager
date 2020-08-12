@@ -11,8 +11,8 @@ const values = [
   }
 ];
 
-export class FillVscServicesTable1597070382932 implements MigrationInterface {
-  private readonly table: string = 'vsc-services';
+export class FillVscServicesTable1597247751055 implements MigrationInterface {
+  private readonly table: string = 'vcsServices';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.manager.createQueryBuilder()
@@ -22,6 +22,5 @@ export class FillVscServicesTable1597070382932 implements MigrationInterface {
       .execute();
   }
 
-  public async down(queryRunner: QueryRunner): Promise<void> {
-  }
+  public async down(queryRunner: QueryRunner): Promise<void> {}
 }

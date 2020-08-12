@@ -1,10 +1,10 @@
 import { MigrationInterface, QueryRunner, Table, TableColumn, TableForeignKey } from 'typeorm';
 
-export class CreateBranchesTable1597070395621 implements MigrationInterface {
-  private readonly table: string = 'branches';
-  private readonly accountTable: string = 'account';
+export class CreateAvailableDependenciesTable1597247800854 implements MigrationInterface {
+  private readonly table: string = 'availableDependencies';
   private readonly companyTable: string = 'company';
-  private readonly vcsServicesTable: string = 'vsc-services';
+  private readonly accountTable: string = 'account';
+  private readonly vcsServicesTable: string = 'vcsServices';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
@@ -25,22 +25,16 @@ export class CreateBranchesTable1597070395621 implements MigrationInterface {
             isNullable: false
           }),
           new TableColumn({
-            name: 'type',
-            type: 'enum',
-            isNullable: false,
-            default: "'base'",
-            enum: ['base', 'compare']
-          }),
-          new TableColumn({
-            name: 'isCustom',
-            type: 'boolean',
-            isNullable: false,
-            default: false
-          }),
-          new TableColumn({
-            name: 'aliases',
-            type: 'text',
+            name: 'minVersion',
+            type: 'char',
+            length: '20',
             isNullable: true
+          }),
+          new TableColumn({
+            name: 'isPrivate',
+            type: 'boolean',
+            default: false,
+            isNullable: false
           }),
           new TableColumn({
             name: 'addedBy',
@@ -53,7 +47,7 @@ export class CreateBranchesTable1597070395621 implements MigrationInterface {
             isNullable: false
           }),
           new TableColumn({
-            name: 'vscServiceId',
+            name: 'vcsServiceId',
             type: 'int',
             isNullable: false
           })
@@ -77,7 +71,7 @@ export class CreateBranchesTable1597070395621 implements MigrationInterface {
           }),
           new TableForeignKey({
             name: `${this.table}-${this.vcsServicesTable}`,
-            columnNames: ['vscServiceId'],
+            columnNames: ['vcsServiceId'],
             referencedTableName: this.vcsServicesTable,
             referencedColumnNames: ['id'],
             onDelete: 'CASCADE',
@@ -91,4 +85,5 @@ export class CreateBranchesTable1597070395621 implements MigrationInterface {
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable(this.table);
   }
+
 }

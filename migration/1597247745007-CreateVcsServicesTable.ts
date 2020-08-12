@@ -1,7 +1,7 @@
 import { MigrationInterface, QueryRunner, Table, TableColumn } from 'typeorm';
 
-export class CreateVcsServicesTable1597065659472 implements MigrationInterface {
-  private readonly table: string = 'vsc-services';
+export class CreateVcsServicesTable1597247745007 implements MigrationInterface {
+  private readonly table: string = 'vcsServices';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.createTable(
