@@ -24,6 +24,9 @@ export class GithubStrategy extends PassportStrategy(Strategy, 'github') {
         'user'
       ]
     }, async (accessToken, refreshToken, profile, done) => {
+
+      console.log(profile);
+
       try {
         const token = new TokenGenerator({ bitSize: 512, baseEncoding: TokenBase.BASE62 });
         const userOrganizations = await this.authService.getUserOrganizations(accessToken);

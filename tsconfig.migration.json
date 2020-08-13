@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "declaration": false,
+    "noImplicitAny": false,
+    "noLib": false,
+    "target": "es2017",
+    "outDir": "dist/migration",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "strict": true
+  },
+  "include": [
+    "migration/*.ts"
+  ]
+}
