@@ -16,9 +16,9 @@
     "migration:revert": "npm run migration:build && ./node_modules/.bin/typeorm migration:revert",
     "migration:generate": "npm run server:build && ./node_modules/.bin/typeorm migration:generate -n ",
     "migration:create": "./node_modules/.bin/typeorm migration:create -n ",
-    "server:build": "tsc -p apps/server/tsconfig.server.json",
-    "server:start": "ts-node --compiler typescript --project apps/server/tsconfig.server.json apps/server/src/main.ts",
-    "start:prod": "node ./dist/server/main.js",
+    "server:build": "rimraf dist/server && tsc -p ./apps/server/tsconfig.server.json",
+    "server:start": "npm run server:build && npm run migration:run && node --inspect --max-old-space-size=3072 ./dist/server/main.js",
+    "server:start:no-migration": "npm run server:build && node --inspect --max-old-space-size=3072 ./dist/server/main.js",
     "lint": "ng lint",
     "test": "ng test --watch=false --no-progress --browsers=ChromeHeadlessNoSandbox"
   },

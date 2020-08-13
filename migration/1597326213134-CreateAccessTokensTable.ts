@@ -1,9 +1,9 @@
 import { MigrationInterface, QueryRunner, Table, TableColumn, TableForeignKey } from 'typeorm';
 
-export class CreateAvailableDependenciesTable1597247800854 implements MigrationInterface {
-  private readonly table: string = 'availableDependencies';
-  private readonly companyTable: string = 'company';
+export class CreateAccessTokensTable1597326213134 implements MigrationInterface {
+  private readonly table: string = 'accessTokens';
   private readonly accountTable: string = 'account';
+  private readonly companyTable: string = 'company';
   private readonly vcsServicesTable: string = 'vcsServices';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -19,32 +19,26 @@ export class CreateAvailableDependenciesTable1597247800854 implements MigrationI
             generationStrategy: 'increment'
           }),
           new TableColumn({
-            name: 'name',
-            type: 'char',
+            name: 'token',
+            type: 'varchar',
             length: '255',
             isNullable: false
           }),
           new TableColumn({
-            name: 'minVersion',
-            type: 'char',
-            length: '20',
-            isNullable: true
-          }),
-          new TableColumn({
-            name: 'isPrivate',
+            name: 'isCompanyAccessToken',
             type: 'boolean',
-            default: false,
-            isNullable: false
+            isNullable: false,
+            default: true
           }),
           new TableColumn({
-            name: 'addedBy',
+            name: 'accountId',
             type: 'int',
             isNullable: true
           }),
           new TableColumn({
             name: 'companyId',
             type: 'int',
-            isNullable: false
+            isNullable: true
           }),
           new TableColumn({
             name: 'vcsServiceId',
@@ -55,27 +49,27 @@ export class CreateAvailableDependenciesTable1597247800854 implements MigrationI
         foreignKeys: [
           new TableForeignKey({
             name: `${this.table}-${this.accountTable}`,
-            columnNames: ['addedBy'],
+            columnNames: ['accountId'],
             referencedTableName: this.accountTable,
             referencedColumnNames: ['id'],
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE'
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE'
           }),
           new TableForeignKey({
             name: `${this.table}-${this.companyTable}`,
             columnNames: ['companyId'],
             referencedTableName: this.companyTable,
             referencedColumnNames: ['id'],
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE'
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE'
           }),
           new TableForeignKey({
             name: `${this.table}-${this.vcsServicesTable}`,
             columnNames: ['vcsServiceId'],
             referencedTableName: this.vcsServicesTable,
             referencedColumnNames: ['id'],
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE'
+            onUpdate: 'CASCADE',
+            onDelete: 'CASCADE'
           })
         ]
       })
@@ -85,5 +79,4 @@ export class CreateAvailableDependenciesTable1597247800854 implements MigrationI
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable(this.table);
   }
-
 }

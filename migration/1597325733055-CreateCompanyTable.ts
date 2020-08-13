@@ -1,6 +1,6 @@
 import { MigrationInterface, QueryRunner, Table, TableColumn } from 'typeorm';
 
-export class CreateCompanyTable1597247727723 implements MigrationInterface {
+export class CreateCompanyTable1597325733055 implements MigrationInterface {
   private readonly table: string = 'company';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -17,19 +17,20 @@ export class CreateCompanyTable1597247727723 implements MigrationInterface {
           }),
           new TableColumn({
             name: 'uuid',
-            type: 'char',
+            type: 'varchar',
             length: '36',
-            isNullable: false
+            isGenerated: true,
+            generationStrategy: 'uuid'
           }),
           new TableColumn({
             name: 'companyName',
-            type: 'char',
+            type: 'varchar',
             length: '255',
             isNullable: false
           }),
           new TableColumn({
             name: 'email',
-            type: 'char',
+            type: 'varchar',
             length: '255',
             isNullable: false,
             isUnique: true

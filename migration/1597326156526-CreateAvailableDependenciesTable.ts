@@ -1,9 +1,7 @@
 import { MigrationInterface, QueryRunner, Table, TableColumn, TableForeignKey } from 'typeorm';
 
-
-export class CreateRepositoriesTable1597247818146 implements MigrationInterface {
-  private readonly table: string = 'repositories';
-  private readonly branchesTable: string = 'branches';
+export class CreateAvailableDependenciesTable1597326156526 implements MigrationInterface {
+  private readonly table: string = 'availableDependencies';
   private readonly companyTable: string = 'company';
   private readonly accountTable: string = 'account';
   private readonly vcsServicesTable: string = 'vcsServices';
@@ -22,32 +20,26 @@ export class CreateRepositoriesTable1597247818146 implements MigrationInterface 
           }),
           new TableColumn({
             name: 'name',
-            type: 'char',
+            type: 'varchar',
             length: '255',
             isNullable: false
           }),
           new TableColumn({
+            name: 'minVersion',
+            type: 'varchar',
+            length: '20',
+            isNullable: true
+          }),
+          new TableColumn({
             name: 'isPrivate',
             type: 'boolean',
-            isNullable: false,
-            default: false
-          }),
-          new TableColumn({
-            name: 'isCompanyRepository',
-            type: 'boolean',
-            isNullable: false,
-            default: true
-          }),
-          new TableColumn({
-            name: 'isChecksSuccess',
-            type: 'boolean',
-            isNullable: false,
-            default: true
-          }),
-          new TableColumn({
-            name: 'accountId',
-            type: 'int',
+            default: false,
             isNullable: false
+          }),
+          new TableColumn({
+            name: 'addedById',
+            type: 'int',
+            isNullable: true
           }),
           new TableColumn({
             name: 'companyId',
@@ -58,22 +50,12 @@ export class CreateRepositoriesTable1597247818146 implements MigrationInterface 
             name: 'vcsServiceId',
             type: 'int',
             isNullable: false
-          }),
-          new TableColumn({
-            name: 'baseBranchId',
-            type: 'int',
-            isNullable: true
-          }),
-          new TableColumn({
-            name: 'compareBranchId',
-            type: 'int',
-            isNullable: true
-          }),
+          })
         ],
         foreignKeys: [
           new TableForeignKey({
             name: `${this.table}-${this.accountTable}`,
-            columnNames: ['accountId'],
+            columnNames: ['addedById'],
             referencedTableName: this.accountTable,
             referencedColumnNames: ['id'],
             onDelete: 'CASCADE',
@@ -94,22 +76,6 @@ export class CreateRepositoriesTable1597247818146 implements MigrationInterface 
             referencedColumnNames: ['id'],
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
-          }),
-          new TableForeignKey({
-            name: `${this.table}-${this.branchesTable}-base`,
-            columnNames: ['baseBranchId'],
-            referencedTableName: this.branchesTable,
-            referencedColumnNames: ['id'],
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE'
-          }),
-          new TableForeignKey({
-            name: `${this.table}-${this.branchesTable}-compare`,
-            columnNames: ['compareBranchId'],
-            referencedTableName: this.branchesTable,
-            referencedColumnNames: ['id'],
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE'
           })
         ]
       })
@@ -119,5 +85,4 @@ export class CreateRepositoriesTable1597247818146 implements MigrationInterface 
   public async down(queryRunner: QueryRunner): Promise<void> {
     await queryRunner.dropTable(this.table);
   }
-
 }

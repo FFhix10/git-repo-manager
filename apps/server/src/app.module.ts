@@ -1,4 +1,5 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { ClientSideMiddleware } from './middlewares/client-side.middleware';
 
@@ -10,6 +11,7 @@ import { AuthModule } from './modules/authentication/auth.module';
   imports: [
     AuthModule,
     ClientSideModule,
+    TypeOrmModule.forRoot(),
     GithubRepositoriesModule,
   ],
   exports: [],

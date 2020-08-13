@@ -11,7 +11,7 @@ const values = [
   }
 ];
 
-export class FillVscServicesTable1597247751055 implements MigrationInterface {
+export class FillVscServicesTable1597325920678 implements MigrationInterface {
   private readonly table: string = 'vcsServices';
 
   public async up(queryRunner: QueryRunner): Promise<void> {

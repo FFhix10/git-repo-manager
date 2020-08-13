@@ -1,9 +1,10 @@
 import { MigrationInterface, QueryRunner, Table, TableColumn, TableForeignKey } from 'typeorm';
 
-export class CreateBranchesTable1597247768150 implements MigrationInterface {
+export class CreateBranchesTable1597326121060 implements MigrationInterface {
   private readonly table: string = 'branches';
   private readonly accountTable: string = 'account';
   private readonly companyTable: string = 'company';
+  private readonly repositoriesTable: string = 'repositories';
   private readonly vcsServicesTable: string = 'vcsServices';
 
   public async up(queryRunner: QueryRunner): Promise<void> {
@@ -20,7 +21,7 @@ export class CreateBranchesTable1597247768150 implements MigrationInterface {
           }),
           new TableColumn({
             name: 'name',
-            type: 'char',
+            type: 'varchar',
             length: '255',
             isNullable: false
           }),
@@ -43,12 +44,17 @@ export class CreateBranchesTable1597247768150 implements MigrationInterface {
             isNullable: true
           }),
           new TableColumn({
-            name: 'addedBy',
+            name: 'addedById',
             type: 'int',
             isNullable: true
           }),
           new TableColumn({
             name: 'companyId',
+            type: 'int',
+            isNullable: false
+          }),
+          new TableColumn({
+            name: 'repositoryId',
             type: 'int',
             isNullable: false
           }),
@@ -61,7 +67,7 @@ export class CreateBranchesTable1597247768150 implements MigrationInterface {
         foreignKeys: [
           new TableForeignKey({
             name: `${this.table}-${this.accountTable}`,
-            columnNames: ['addedBy'],
+            columnNames: ['addedById'],
             referencedTableName: this.accountTable,
             referencedColumnNames: ['id'],
             onDelete: 'CASCADE',
@@ -71,6 +77,14 @@ export class CreateBranchesTable1597247768150 implements MigrationInterface {
             name: `${this.table}-${this.companyTable}`,
             columnNames: ['companyId'],
             referencedTableName: this.companyTable,
+            referencedColumnNames: ['id'],
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
+          }),
+          new TableForeignKey({
+            name: `${this.table}-${this.repositoriesTable}`,
+            columnNames: ['repositoryId'],
+            referencedTableName: this.repositoriesTable,
             referencedColumnNames: ['id'],
             onDelete: 'CASCADE',
             onUpdate: 'CASCADE'
