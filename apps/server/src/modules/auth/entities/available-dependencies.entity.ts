@@ -1,26 +1,22 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 
 import { AccountEntity } from './account.entity';
-import { CompanyEntity } from './company.entity';
+import { CompanyEntity } from '../../company/entities/company.entity';
 import { VcsServicesEntity } from './vcs-services.entity';
-import { RepositoriesEntity } from './repositories.entity';
 
-@Entity('branches')
-export class BranchesEntity {
+@Entity('availableDependencies')
+export class AvailableDependenciesEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column({ type: 'varchar', length: 255, nullable: false })
   name: string;
 
-  @Column({ type: 'enum', enum: ['base', 'compare'], nullable: false, default: 'base' })
-  type: 'base' | 'compare';
+  @Column({ type: 'varchar', length: 20, nullable: true })
+  minVersion: string;
 
   @Column({ type: 'boolean', nullable: false, default: false })
   isPrivate: boolean;
-
-  @Column({ type: 'text', nullable: true })
-  aliases: string;
 
   @Column({ type: 'int', nullable: true })
   addedById: number;
@@ -29,24 +25,17 @@ export class BranchesEntity {
   companyId: number;
 
   @Column({ type: 'int', nullable: false })
-  vscServiceId: boolean;
+  vcsServiceId: number;
 
-  @Column({ type: 'int', nullable: false })
-  repositoryId: number;
-
-  @ManyToOne(() => AccountEntity, data => data.branches)
+  @ManyToOne(() => AccountEntity, data => data.availableDependency)
   @JoinColumn()
   addedBy: AccountEntity;
 
-  @ManyToOne(() => CompanyEntity, data => data.branches)
+  @ManyToOne(() => CompanyEntity, data => data.availableDependency)
   @JoinColumn()
   company: CompanyEntity;
 
-  @ManyToOne(() => VcsServicesEntity, data => data.branches)
+  @ManyToOne(() => VcsServicesEntity, data => data.availableDependency)
   @JoinColumn()
   vcsService: VcsServicesEntity;
-
-  @ManyToOne(() => RepositoriesEntity, data => data.branch)
-  @JoinColumn()
-  repository: RepositoriesEntity;
 }

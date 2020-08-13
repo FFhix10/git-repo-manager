@@ -1,9 +1,18 @@
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany, OneToOne, Generated } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  OneToOne,
+  Generated
+} from 'typeorm';
 
-import { AccessTokensEntity } from './access-tokens.entity';
-import { AccountEntity } from './account.entity';
-import { AvailableDependenciesEntity } from './available-dependencies.entity';
-import { BranchesEntity } from './branches.entity';
+import {
+  AccessTokensEntity,
+  AccountEntity,
+  AvailableDependenciesEntity,
+  BranchesEntity
+} from '../../auth/entities';
 
 @Entity('company')
 export class CompanyEntity {

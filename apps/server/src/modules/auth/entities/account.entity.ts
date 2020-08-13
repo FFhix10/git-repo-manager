@@ -3,7 +3,7 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToOne, Generated,
 import { AccessTokensEntity } from './access-tokens.entity';
 import { AvailableDependenciesEntity } from './available-dependencies.entity';
 import { BranchesEntity } from './branches.entity';
-import { CompanyEntity } from './company.entity';
+import { CompanyEntity } from '../../company/entities';
 import { RepositoriesEntity } from './repositories.entity';
 
 @Entity('account')
@@ -31,7 +31,7 @@ export class AccountEntity {
   companyId: number;
 
   @OneToMany(() => AvailableDependenciesEntity, data => data.addedBy)
-  availableDependency: AvailableDependenciesEntity
+  availableDependency: AvailableDependenciesEntity;
 
   @OneToMany(() => BranchesEntity, data => data.addedBy)
   branches: BranchesEntity;

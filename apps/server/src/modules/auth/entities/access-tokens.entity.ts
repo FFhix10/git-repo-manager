@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
 
 import { AccountEntity } from './account.entity';
-import { CompanyEntity } from './company.entity';
+import { CompanyEntity } from '../../company/entities/company.entity';
 import { VcsServicesEntity } from './vcs-services.entity';
 
 @Entity('accessTokens')
