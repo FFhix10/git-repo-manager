@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 
-import { AccountEntity } from './account.entity';
+import { AccountEntity } from '../../account/entities/account.entity';
 import { CompanyEntity } from '../../company/entities/company.entity';
 import { VcsServicesEntity } from './vcs-services.entity';
 

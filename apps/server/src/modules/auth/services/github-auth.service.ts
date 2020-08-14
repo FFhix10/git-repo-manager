@@ -5,11 +5,10 @@ import { Repository } from 'typeorm';
 import { LayerService } from './layer.service';
 import { AuthInterface } from '../../../interfaces/auth.interface';
 import { UserDataInterface } from '../../../interfaces/user-data.interface';
-import {
-  AccessTokensEntity,
-  AccountEntity
-} from '../entities';
+import { AccessTokensEntity } from '../../account/entities';
 import { CompanyEntity } from '../../company/entities';
+import { AccountEntity } from '../../account/entities';
+import { CompanyService } from '../../company/services';
 
 @Injectable()
 export class GithubAuthService {
@@ -29,7 +28,8 @@ export class GithubAuthService {
 
   public async checkForOrganization(authData: AuthInterface) {
     this.userAuthOrganization = authData.organization;
-    return await this.layer.getOrgData(authData);
+    // return await this.layer.getOrgData(authData);
+    return 1;
   }
 
   public async saveLoggedInUser(userData: UserDataInterface) {

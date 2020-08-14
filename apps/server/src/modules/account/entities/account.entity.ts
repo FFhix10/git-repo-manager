@@ -1,10 +1,10 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToOne, Generated, JoinColumn, OneToMany } from 'typeorm';
 
 import { AccessTokensEntity } from './access-tokens.entity';
-import { AvailableDependenciesEntity } from './available-dependencies.entity';
-import { BranchesEntity } from './branches.entity';
+import { AvailableDependenciesEntity } from '../../auth/entities/available-dependencies.entity';
+import { BranchesEntity } from '../../auth/entities/branches.entity';
 import { CompanyEntity } from '../../company/entities';
-import { RepositoriesEntity } from './repositories.entity';
+import { RepositoriesEntity } from '../../auth/entities/repositories.entity';
 
 @Entity('account')
 export class AccountEntity {
@@ -21,8 +21,8 @@ export class AccountEntity {
   @Column({ type: 'varchar', length: 255, nullable: false })
   username: string;
 
-  @Column({ type: 'varchar', length: 255, nullable: false, unique: true })
-  email: string;
+  @Column({ type: 'bigint', nullable: false, unique: true })
+  vcsId: string;
 
   @Column({ type: 'enum', enum: ['member', 'owner'], default: 'member' })
   role: 'member' | 'owner';

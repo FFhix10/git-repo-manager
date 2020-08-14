@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 
-import { AccountEntity } from './account.entity';
+import { AccountEntity } from '../../account/entities/account.entity';
 import { BranchesEntity } from './branches.entity';
 import { UpdatedDependenciesEntity } from './updated-dependencies.entity';
 

@@ -34,18 +34,6 @@ export class CreateCompanyTable1597325733055 implements MigrationInterface {
             length: '255',
             isNullable: false,
             isUnique: true
-          }),
-          new TableColumn({
-            name: 'isGitHubUsed',
-            type: 'boolean',
-            isNullable: false,
-            default: false
-          }),
-          new TableColumn({
-            name: 'isGitLabUsed',
-            type: 'boolean',
-            isNullable: false,
-            default: false
           })
         ]
       })

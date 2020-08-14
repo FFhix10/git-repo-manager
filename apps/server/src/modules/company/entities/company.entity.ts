@@ -4,15 +4,14 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   OneToOne,
-  Generated
+  Generated, ManyToOne, JoinColumn,
 } from 'typeorm';
 
-import {
-  AccessTokensEntity,
-  AccountEntity,
-  AvailableDependenciesEntity,
-  BranchesEntity
-} from '../../auth/entities';
+import { AccessTokensEntity } from '../../account/entities/access-tokens.entity';
+import { AccountEntity } from '../../account/entities/account.entity';
+import { AvailableDependenciesEntity } from '../../auth/entities/available-dependencies.entity';
+import { BranchesEntity } from '../../auth/entities/branches.entity';
+import { VcsServicesEntity } from '../../auth/entities/vcs-services.entity';
 
 @Entity('company')
 export class CompanyEntity {
@@ -29,11 +28,11 @@ export class CompanyEntity {
   @Column({ type: 'varchar', length: 255, nullable: false, unique: true })
   email: string;
 
-  @Column({ type: 'boolean', nullable: false, default: false })
-  isGitHubUsed: boolean;
+  @Column({ type: 'bigint', nullable: false, unique: true })
+  vcsId: number;
 
-  @Column({ type: 'boolean', nullable: false, default: false })
-  isGitLabUsed: boolean;
+  @Column({ type: 'int', nullable: false })
+  vcsServiceId: number;
 
   @OneToMany(() => AccountEntity, data => data.company)
   account: AccountEntity;
@@ -46,4 +45,8 @@ export class CompanyEntity {
 
   @OneToOne(() => AccessTokensEntity, data => data.company)
   accessToken: AccessTokensEntity;
+
+  @ManyToOne(() => VcsServicesEntity, data => data.company)
+  @JoinColumn()
+  vcsService: VcsServicesEntity;
 }

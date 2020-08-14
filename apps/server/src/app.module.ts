@@ -3,23 +3,23 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { ClientSideMiddleware } from './middlewares/client-side.middleware';
 
+import { AccountModule } from './modules/account/account.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ClientSideModule } from './modules/client-side/client-side.module';
 import { CompanyModule } from './modules/company/company.module';
 import { GithubRepositoriesModule } from './modules/github-repositories/github-repositories.module';
 
 const MODULES = [
+  AccountModule,
   AuthModule,
   ClientSideModule,
   CompanyModule,
-  GithubRepositoriesModule
+  GithubRepositoriesModule,
+  TypeOrmModule.forRoot()
 ];
 
 @Module({
-  imports: [
-    TypeOrmModule.forRoot(),
-    ...MODULES
-  ],
+  imports: MODULES,
   exports: [],
   providers: []
 })
