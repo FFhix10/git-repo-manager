@@ -4,7 +4,7 @@ import { AccessTokensEntity } from './access-tokens.entity';
 import { AvailableDependenciesEntity } from '../../auth/entities/available-dependencies.entity';
 import { BranchesEntity } from '../../auth/entities/branches.entity';
 import { CompanyEntity } from '../../company/entities';
-import { RepositoriesEntity } from '../../auth/entities/repositories.entity';
+import { RepositoriesEntity } from '../../repositories/entities';
 
 @Entity('account')
 export class AccountEntity {
@@ -21,8 +21,11 @@ export class AccountEntity {
   @Column({ type: 'varchar', length: 255, nullable: false })
   username: string;
 
+  @Column({ type: 'varchar', length: 255, nullable: false, unique: true })
+  email: string;
+
   @Column({ type: 'bigint', nullable: false, unique: true })
-  vcsId: string;
+  vcsId: number;
 
   @Column({ type: 'enum', enum: ['member', 'owner'], default: 'member' })
   role: 'member' | 'owner';

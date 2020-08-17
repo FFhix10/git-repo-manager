@@ -21,4 +21,14 @@ export class AccessTokenService {
   queryBuilder(alias: string): SelectQueryBuilder<AccessTokensEntity> {
     return this.queryBuilder(alias);
   }
+
+  create(data: AccessTokensEntity): Promise<AccessTokensEntity> {
+    const entity = this.repository.create(data);
+
+    return this.repository.save(entity);
+  }
+
+  get repository(): Repository<AccessTokensEntity> {
+    return this.accessTokenRepository;
+  }
 }

@@ -16,13 +16,13 @@ export class AccessTokensEntity {
   isCompanyAccessToken: boolean;
 
   @Column({ type: 'int', nullable: true })
-  accountId: boolean;
+  accountId: number;
 
   @Column({ type: 'int', nullable: true })
-  companyId: boolean;
+  companyId: number;
 
   @Column({ type: 'int', nullable: false })
-  vcsServiceId: boolean;
+  vcsServiceId: number;
 
   @OneToOne(() => AccountEntity, data => data.accessToken)
   @JoinColumn()
