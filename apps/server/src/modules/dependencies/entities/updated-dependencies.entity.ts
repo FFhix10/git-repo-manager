@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 
-import { RepositoriesEntity } from './repositories.entity';
+import { RepositoriesEntity } from '../../repositories/entities/repositories.entity';
 
 @Entity('updatedDependencies')
 export class UpdatedDependenciesEntity {

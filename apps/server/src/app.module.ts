@@ -8,6 +8,8 @@ import { AuthModule } from './modules/auth/auth.module';
 import { ClientSideModule } from './modules/client-side/client-side.module';
 import { CompanyModule } from './modules/company/company.module';
 import { GithubRepositoriesModule } from './modules/github-repositories/github-repositories.module';
+import { DependenciesModule } from './modules/dependencies/dependencies.module';
+import { RepositoriesModule } from './modules/repositories/repositories.module';
 
 const MODULES = [
   AccountModule,
@@ -15,6 +17,8 @@ const MODULES = [
   ClientSideModule,
   CompanyModule,
   GithubRepositoriesModule,
+  RepositoriesModule,
+  DependenciesModule,
   TypeOrmModule.forRoot()
 ];
 

@@ -1,14 +1,8 @@
 import { Injectable, HttpService } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
 
 import { LayerService } from './layer.service';
 import { AuthInterface } from '../../../interfaces/auth.interface';
 import { UserDataInterface } from '../../../interfaces/user-data.interface';
-import { AccessTokensEntity } from '../../account/entities';
-import { CompanyEntity } from '../../company/entities';
-import { AccountEntity } from '../../account/entities';
-import { CompanyService } from '../../company/services';
 
 @Injectable()
 export class GithubAuthService {
@@ -17,13 +11,7 @@ export class GithubAuthService {
 
   constructor(
     private readonly layer: LayerService,
-    private readonly http: HttpService,
-    @InjectRepository (AccessTokensEntity)
-    private readonly accessTokenRepository: Repository<AccessTokensEntity>,
-    @InjectRepository (AccountEntity)
-    private readonly accountEntity: Repository<AccountEntity>,
-    @InjectRepository (CompanyEntity)
-    private readonly companyRepository: Repository<CompanyEntity>
+    private readonly http: HttpService
   ) {  }
 
   public async checkForOrganization(authData: AuthInterface) {

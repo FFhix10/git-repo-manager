@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMan
 
 import { AccountEntity } from '../../account/entities/account.entity';
 import { BranchesEntity } from '../../auth/entities/branches.entity';
-import { UpdatedDependenciesEntity } from './updated-dependencies.entity';
+import { UpdatedDependenciesEntity } from '../../dependencies/entities/updated-dependencies.entity';
 
 @Entity('repositories')
 export class RepositoriesEntity {

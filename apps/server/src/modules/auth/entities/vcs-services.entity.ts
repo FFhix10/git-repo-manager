@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
 import { CompanyEntity } from '../../company/entities/company.entity';
 import { AccessTokensEntity } from '../../account/entities/access-tokens.entity';
-import { AvailableDependenciesEntity } from './available-dependencies.entity';
+import { AvailableDependenciesEntity } from '../../dependencies/entities/available-dependencies.entity';
 import { BranchesEntity } from './branches.entity';
 
 @Entity('vcsServices')

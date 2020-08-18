@@ -9,7 +9,7 @@ import {
 
 import { AccessTokensEntity } from '../../account/entities/access-tokens.entity';
 import { AccountEntity } from '../../account/entities/account.entity';
-import { AvailableDependenciesEntity } from '../../auth/entities/available-dependencies.entity';
+import { AvailableDependenciesEntity } from '../../dependencies/entities/available-dependencies.entity';
 import { BranchesEntity } from '../../auth/entities/branches.entity';
 import { VcsServicesEntity } from '../../auth/entities/vcs-services.entity';
 
