@@ -36,9 +36,8 @@ export class CreateAccountTable1597325788554 implements MigrationInterface {
             isNullable: false
           }),
           new TableColumn({
-            name: 'email',
-            type: 'varchar',
-            length: '255',
+            name: 'vcsId',
+            type: 'bigint',
             isNullable: false,
             isUnique: true
           }),

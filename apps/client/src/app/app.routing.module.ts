@@ -10,12 +10,12 @@ export const appRoutes: Routes = [
   },
   {
     path: '',
-    canActivate: [ AuthGuard ],
+    // canActivate: [ AuthGuard ],
     loadChildren: './modules/company-projects/company-projects.module#CompanyProjectsModule'
   },
   {
     path: '',
-    canActivate: [ AuthGuard, RepositoryDetailsGuard ],
+    // canActivate: [ AuthGuard, RepositoryDetailsGuard ],
     loadChildren: './modules/repository-details/repository-details.module#RepositoryDetailsModule'
   }
 ];

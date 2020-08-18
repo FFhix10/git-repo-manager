@@ -1,9 +1,9 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
 
-import { AccountEntity } from './account.entity';
-import { CompanyEntity } from './company.entity';
+import { AccountEntity } from '../../account/entities/account.entity';
+import { CompanyEntity } from '../../company/entities/company.entity';
 import { VcsServicesEntity } from './vcs-services.entity';
-import { RepositoriesEntity } from './repositories.entity';
+import { RepositoriesEntity } from '../../repositories/entities';
 
 @Entity('branches')
 export class BranchesEntity {

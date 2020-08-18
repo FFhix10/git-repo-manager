@@ -1,8 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'typeorm';
 
 import { AccountEntity } from './account.entity';
-import { CompanyEntity } from './company.entity';
-import { VcsServicesEntity } from './vcs-services.entity';
+import { CompanyEntity } from '../../company/entities/company.entity';
+import { VcsServicesEntity } from '../../auth/entities/vcs-services.entity';
 
 @Entity('accessTokens')
 export class AccessTokensEntity {
@@ -16,13 +16,13 @@ export class AccessTokensEntity {
   isCompanyAccessToken: boolean;
 
   @Column({ type: 'int', nullable: true })
-  accountId: boolean;
+  accountId: number;
 
   @Column({ type: 'int', nullable: true })
-  companyId: boolean;
+  companyId: number;
 
   @Column({ type: 'int', nullable: false })
-  vcsServiceId: boolean;
+  vcsServiceId: number;
 
   @OneToOne(() => AccountEntity, data => data.accessToken)
   @JoinColumn()

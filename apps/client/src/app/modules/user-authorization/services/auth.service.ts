@@ -19,17 +19,9 @@ export class AuthService implements ErrorHandler {
   ) {  }
 
   public authenticateUser(authData) {
-    return this.http.post(`${environment.url}/api/${authData.dataSource}/organization-check`, authData)
-      .pipe(catchError(this.handleError))
-      .subscribe(() => {
-        this.notificationService.clear();
-        this.lsService.setItem('org', authData.organization);
-        this.lsService.setItem('source', authData.dataSource);
-        window.location.href = `${environment.url}/api/${authData.dataSource}/login`;
-      }, err => {
-        this.notificationService.clear();
-        this.notificationService.error(err);
-      });
+    this.lsService.setItem('org', authData.organization);
+    this.lsService.setItem('source', authData.dataSource);
+    window.location.href = `${environment.url}/api/${authData.dataSource}/login`;
   }
 
   public check(): Observable<any> {

@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     const repository = this.lsService.getItem('repository');
-
+/*
     this.auth.check()
       .subscribe(result => {
         if (!result) {
@@ -32,6 +32,6 @@ export class AppComponent implements OnInit {
         else {
           this.router.navigateByUrl('repositories');
         }
-      });
+      });*/
   }
 }

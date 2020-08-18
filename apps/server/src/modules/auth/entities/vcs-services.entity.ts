@@ -1,6 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 
-import { AccessTokensEntity } from './access-tokens.entity';
+import { CompanyEntity } from '../../company/entities/company.entity';
+import { AccessTokensEntity } from '../../account/entities/access-tokens.entity';
 import { AvailableDependenciesEntity } from './available-dependencies.entity';
 import { BranchesEntity } from './branches.entity';
 
@@ -20,4 +21,7 @@ export class VcsServicesEntity {
 
   @OneToMany(() => AccessTokensEntity, data => data.vcsService)
   accessToken: AccessTokensEntity;
+
+  @OneToMany(() => CompanyEntity, data => data.vcsService)
+  company: CompanyEntity;
 }
