@@ -12,6 +12,7 @@ import { AccountEntity } from '../../account/entities/account.entity';
 import { AvailableDependenciesEntity } from '../../dependencies/entities/available-dependencies.entity';
 import { BranchesEntity } from '../../auth/entities/branches.entity';
 import { VcsServicesEntity } from '../../auth/entities/vcs-services.entity';
+import { RepositoriesEntity } from '../../repositories/entities/repositories.entity';
 
 @Entity('company')
 export class CompanyEntity {
@@ -49,4 +50,7 @@ export class CompanyEntity {
   @ManyToOne(() => VcsServicesEntity, data => data.company)
   @JoinColumn()
   vcsService: VcsServicesEntity;
+
+  @OneToMany(() => RepositoriesEntity, data => data.company)
+  repository: RepositoriesEntity;
 }
