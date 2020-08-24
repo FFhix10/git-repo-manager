@@ -48,8 +48,8 @@ export class UpdateRepositoriesService {
       return {
         repoName: repository['full_name'],
         repoType: repository['private'] ? 'Private' : 'Public'
-      }
-    })
+      };
+    });
   }
 
   private async getPackages(organization: string) {
@@ -60,8 +60,8 @@ export class UpdateRepositoriesService {
       })
       .then(packages => {
         return packages.map(pkg => {
-          return pkg.name
-        })
+          return pkg.name;
+        });
       });
   }
 
@@ -127,7 +127,7 @@ export class UpdateRepositoriesService {
             case 404:
               return undefined;
           }
-        })
+        });
     }
 
     return result;

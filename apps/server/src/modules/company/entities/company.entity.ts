@@ -39,10 +39,10 @@ export class CompanyEntity {
   account: AccountEntity;
 
   @OneToMany(() => AvailableDependenciesEntity, data => data.company)
-  availableDependency: AvailableDependenciesEntity;
+  availableDependency: AvailableDependenciesEntity[];
 
   @OneToMany(() => BranchesEntity, data => data.company)
-  branches: BranchesEntity;
+  branches: BranchesEntity[];
 
   @OneToOne(() => AccessTokensEntity, data => data.company)
   accessToken: AccessTokensEntity;
@@ -52,5 +52,5 @@ export class CompanyEntity {
   vcsService: VcsServicesEntity;
 
   @OneToMany(() => RepositoriesEntity, data => data.company)
-  repository: RepositoriesEntity;
+  repository: RepositoriesEntity[];
 }

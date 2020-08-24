@@ -22,10 +22,10 @@ export class CronService {
   }
 
   private async update() {
-    await this.githubRepositoriesService.updateRepositories();
+    await this.githubRepositoriesService.getRepositoriesToUpdate();
 
     return new CronJob('00 09 17 * * 1-5',  async () => {
-      await this.githubRepositoriesService.updateRepositories();
+      await this.githubRepositoriesService.getRepositoriesToUpdate();
     }, null, true, 'Europe/Kiev');
   }
 
