@@ -1,11 +1,18 @@
 import { Injectable, HttpService } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+
+import { Repository, SelectQueryBuilder } from 'typeorm';
 
 import { CompanyService } from '../../../company/services';
 import { UpdateGitHubRepositoriesService } from './update-repositories.service';
+import { RepositoriesEntity } from '../../entities';
+import { Repositories } from '../models';
 
 @Injectable()
 export class GithubRepositoriesService {
   constructor(
+    @InjectRepository(RepositoriesEntity)
+    private readonly repository: Repository<RepositoriesEntity>,
     private readonly http: HttpService,
     private readonly companyService: CompanyService,
     private readonly updateGitHubRepositoriesService: UpdateGitHubRepositoriesService
@@ -123,5 +130,74 @@ export class GithubRepositoriesService {
       }));
 
     return this.updateGitHubRepositoriesService.updateRepositories(companies);
+  }
+
+  getRepositoriesByCompany(companyId: number): Promise<Repositories[]> {
+    return this.queryBuilder('repositories')
+      .where('repositories.companyId = :companyId', { companyId })
+      .innerJoin(
+        'repositories.company',
+        'cm',
+        'cm.id = :companyId',
+        { companyId })
+      .leftJoin(
+        'cm.branches',
+        'branches')
+      .leftJoin(
+        'branches.updatedDependency',
+        'updatedDependency',
+        'updatedDependency.repositoryId = repositories.id AND updatedDependency.branchId = branches.id'
+      )
+      .select([
+        'repositories.id',
+        'repositories.name',
+        'repositories.isPrivate',
+
+        'cm.companyName',
+
+        'branches.name',
+        'branches.type',
+
+        'updatedDependency.name',
+        'updatedDependency.value'
+      ])
+      .getMany()
+      .then(repositories => repositories.map(repository => {
+        const repositoryObject = {
+          id: repository.id,
+          name: repository.name,
+          isPrivate: repository.isPrivate,
+          branches: {
+            base: {
+              name: '',
+              dependencies: []
+            },
+            compare: {
+              name: '',
+              dependencies: []
+            }
+          }
+        };
+
+        for (const branch of repository.company.branches) {
+          switch (branch.type) {
+            case 'base':
+            case 'compare':
+              repositoryObject.branches[branch.type].name = branch.name;
+              repositoryObject.branches[branch.type].dependencies = branch.updatedDependency;
+
+              break;
+
+            default:
+              break;
+          }
+        }
+
+        return repositoryObject;
+      }));
+  }
+
+  queryBuilder(alias: string): SelectQueryBuilder<RepositoriesEntity> {
+    return this.repository.createQueryBuilder(alias);
   }
 }

@@ -6,7 +6,7 @@ import { GithubRepositoriesModule } from './+github/github-repositories.module';
 
 const REPOSITORIES_MODULES = [
   TypeOrmModule.forFeature(REPOSITORIES_ENTITIES),
-  // GithubRepositoriesModule
+  GithubRepositoriesModule
 ];
 
 @Module({
