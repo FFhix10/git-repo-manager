@@ -8,6 +8,7 @@ export interface RepositoriesToUpdate {
 }
 
 interface BranchesToUpdate {
+  id: number;
   name: string;
   httpRequests: string[];
 }

@@ -1,9 +1,10 @@
-import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm';
+import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMany } from 'typeorm';
 
 import { AccountEntity } from '../../account/entities/account.entity';
 import { CompanyEntity } from '../../company/entities/company.entity';
 import { VcsServicesEntity } from './vcs-services.entity';
 import { RepositoriesEntity } from '../../repositories/entities/repositories.entity';
+import { UpdatedDependenciesEntity } from '../../dependencies/entities/updated-dependencies.entity';
 
 @Entity('branches')
 export class BranchesEntity {
@@ -49,4 +50,7 @@ export class BranchesEntity {
   @ManyToOne(() => RepositoriesEntity, data => data.branch)
   @JoinColumn()
   repository: RepositoriesEntity;
+
+  @OneToMany(() => UpdatedDependenciesEntity, data => data.branch)
+  updatedDependency: UpdatedDependenciesEntity[];
 }

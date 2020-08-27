@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 
-import { Repository } from 'typeorm';
+import { Repository, SelectQueryBuilder, UpdateResult } from 'typeorm';
 
 import { AvailableDependenciesEntity, UpdatedDependenciesEntity } from '../entities';
 
@@ -14,12 +14,35 @@ export class DependenciesService {
     private readonly updatedDependenciesRepository: Repository<UpdatedDependenciesEntity>
   ) {}
 
-  getAvailableRepositoriesForCompany(companyId: number, vcsServiceId: number) {
+  getAvailableRepositoriesForCompany(companyId: number, vcsServiceId: number): Promise<AvailableDependenciesEntity[]> {
     return this.availableDependenciesRepository
       .createQueryBuilder('availableRepositories')
       .where(
         'availableRepositories.companyId = :companyId AND availableRepositories.vcsServiceId = :vcsServiceId',
         { companyId, vcsServiceId })
       .getMany();
+  }
+
+  async updateDependencies(dependency: UpdatedDependenciesEntity): Promise<UpdatedDependenciesEntity | UpdateResult> {
+    const { name, repositoryId, branchId } = dependency;
+    const dependencyFromDb = await this.updatedDependenciesQueryBuilder('updatedDependency')
+      .where(
+        'updatedDependency.name = :name AND updatedDependency.repositoryId = :repositoryId AND updatedDependency.branchId = :branchId',
+        { name, repositoryId, branchId }
+      ).getOne();
+
+    if (dependencyFromDb) {
+      return this.updatedDependenciesRepository.update(dependencyFromDb.id, dependency);
+    }
+
+    return this.updatedDependenciesRepository.save(dependency);
+  }
+
+  availableDependenciesQueryBuilder(alias: string): SelectQueryBuilder<AvailableDependenciesEntity> {
+    return this.availableDependenciesRepository.createQueryBuilder(alias);
+  }
+
+  updatedDependenciesQueryBuilder(alias: string): SelectQueryBuilder<UpdatedDependenciesEntity> {
+    return this.updatedDependenciesRepository.createQueryBuilder(alias);
   }
 }
