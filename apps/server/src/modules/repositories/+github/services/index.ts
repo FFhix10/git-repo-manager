@@ -1,5 +1,5 @@
 import { GithubRepositoriesService } from './repositories.service';
-import { UpdateRepositoriesService } from './update-repositories.service';
+import { UpdateGitHubRepositoriesService } from './update-repositories.service';
 import { DependenciesService } from '../../../dependencies/services';
 import { CompanyService } from '../../../company/services';
 
@@ -8,7 +8,7 @@ export * from './update-repositories.service';
 
 export const REPOSITORIES_SERVICES = [
   GithubRepositoriesService,
-  UpdateRepositoriesService,
+  UpdateGitHubRepositoriesService,
   CompanyService,
   DependenciesService
 ];

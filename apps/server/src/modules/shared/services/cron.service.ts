@@ -7,7 +7,7 @@ import { GithubRepositoriesService } from '../../repositories/+github/services';
 export class CronService {
 
   constructor(
-    private readonly githubRepositoriesService: GithubRepositoriesService
+    private readonly githubRepositoriesService: GithubRepositoriesService,
   ) {
     this.updateMorning();
     this.updateEvening();
@@ -19,7 +19,7 @@ export class CronService {
     }, null, true, 'Europe/Kiev');
   }
 
-  private updateEvening() {
+  private async updateEvening() {
     return new CronJob('00 00 19 * * 1-5', async () => {
       await this.githubRepositoriesService.getCompaniesRepositoriesToUpdate();
     }, null, true, 'Europe/Kiev');

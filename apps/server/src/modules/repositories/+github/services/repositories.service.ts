@@ -1,16 +1,14 @@
 import { Injectable, HttpService } from '@nestjs/common';
 
 import { CompanyService } from '../../../company/services';
-import { DependenciesService } from '../../../dependencies/services';
-import { UpdateRepositoriesService } from './update-repositories.service';
+import { UpdateGitHubRepositoriesService } from './update-repositories.service';
 
 @Injectable()
 export class GithubRepositoriesService {
   constructor(
     private readonly http: HttpService,
     private readonly companyService: CompanyService,
-    private readonly dependenciesService: DependenciesService,
-    private readonly updateRepositoriesService: UpdateRepositoriesService
+    private readonly updateGitHubRepositoriesService: UpdateGitHubRepositoriesService
   ) {}
 
   async getCompaniesRepositoriesToUpdate() {
@@ -75,7 +73,16 @@ export class GithubRepositoriesService {
                 repositoryObject.branches[branch.type].id = branch.id;
                 repositoryObject.branches[branch.type].name = branch.name;
                 repositoryObject.branches[branch.type].httpRequests
-                  .push(this.http.get(`https://raw.githubusercontent.com/${repository.name}/${branch.name}/package.json`, heads).toPromise().catch(err => { return; }));
+                  .push(
+                    this.http
+                      .get(`https://raw.githubusercontent.com/${repository.name}/${branch.name}/package.json`, heads)
+                      .toPromise()
+                      .catch(err => {
+                        if (err.response.status !== 404) {
+                          console.warn(err.response.data);
+                        }
+                      })
+                  );
                 break;
 
               default:
@@ -90,7 +97,16 @@ export class GithubRepositoriesService {
                     repositoryObject.branches[branch.type].id = branch.id;
                     repositoryObject.branches[branch.type].name = branch.name;
                     repositoryObject.branches[branch.type].httpRequests
-                      .push(this.http.get(`https://raw.githubusercontent.com/${repository.name}/${alias}/package.json`, heads).toPromise().catch(err => { return; }));
+                      .push(
+                        this.http
+                          .get(`https://raw.githubusercontent.com/${repository.name}/${alias}/package.json`, heads)
+                          .toPromise()
+                          .catch(err => {
+                            if (err.response.status !== 404) {
+                              console.warn(err.response.data);
+                            }
+                          })
+                      );
                     break;
 
                   default:
@@ -106,6 +122,6 @@ export class GithubRepositoriesService {
         return companyObject;
       }));
 
-    return this.updateRepositoriesService.updateRepositories(companies);
+    return this.updateGitHubRepositoriesService.updateRepositories(companies);
   }
 }

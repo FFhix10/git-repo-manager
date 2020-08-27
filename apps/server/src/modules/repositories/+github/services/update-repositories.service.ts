@@ -6,7 +6,7 @@ import { CompaniesToUpdate } from '../models';
 import { DependenciesService } from '../../../dependencies/services';
 
 @Injectable()
-export class UpdateRepositoriesService {
+export class UpdateGitHubRepositoriesService {
   constructor(
     private readonly dependenciesService: DependenciesService
   ) {}
@@ -29,19 +29,15 @@ export class UpdateRepositoriesService {
 
         const [baseBranch, compareBranch] = await Promise.all([
           this.getBranchDataFromGitHub(
-            repository.name,
             repository.id,
             repository.branches.base.id,
             repository.branches.compare.httpRequests,
-            company.companyAccessToken,
             company.availableDependencies,
           ),
           this.getBranchDataFromGitHub(
-            repository.name,
             repository.id,
             repository.branches.compare.id,
             repository.branches.compare.httpRequests,
-            company.companyAccessToken,
             company.availableDependencies
           )
         ]);
@@ -70,12 +66,10 @@ export class UpdateRepositoriesService {
     console.log(`GitHub data updating finished - took ${new Date(Date.now() - start).getMinutes()}m ${new Date(Date.now() - start).getSeconds()}s`);
   }
 
-  async getBranchDataFromGitHub(
-    repoName: string,
+  private async getBranchDataFromGitHub(
     repositoryId: number,
     branchId: number,
     httpRequests: string[],
-    accessToken: string,
     availableDependencies: string[]
   ) {
     const [...repositoriesDependencies] = await Promise.all(httpRequests);

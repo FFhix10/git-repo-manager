@@ -7,18 +7,18 @@ import { AccountModule } from './modules/account/account.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { ClientSideModule } from './modules/client-side/client-side.module';
 import { CompanyModule } from './modules/company/company.module';
-import { GithubRepositoriesModule } from './modules/github-repositories/github-repositories.module';
 import { DependenciesModule } from './modules/dependencies/dependencies.module';
 import { RepositoriesModule } from './modules/repositories/repositories.module';
+import { SharedModule } from './modules/shared/shared.module';
 
 const MODULES = [
   AccountModule,
   AuthModule,
   ClientSideModule,
   CompanyModule,
-  GithubRepositoriesModule,
   RepositoriesModule,
   DependenciesModule,
+  SharedModule,
   TypeOrmModule.forRoot()
 ];
 
