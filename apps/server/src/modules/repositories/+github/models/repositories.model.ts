@@ -7,7 +7,7 @@ export interface Repositories {
 
 export interface Branches {
   base: Branch;
-  companre: Branch;
+  compare: Branch;
 }
 
 export interface Branch {

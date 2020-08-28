@@ -1,4 +1,4 @@
-export enum VcsServices {
+export enum VcsServicesNames {
   GITHUB = 'github',
   GITLAB = 'gitlab'
 }

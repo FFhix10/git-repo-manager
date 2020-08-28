@@ -18,6 +18,9 @@ export class AvailableDependenciesEntity {
   @Column({ type: 'boolean', nullable: false, default: false })
   isPrivate: boolean;
 
+  @Column({ type: 'boolean', nullable: false, default: false })
+  isRequired: boolean;
+
   @Column({ type: 'int', nullable: true })
   addedById: number;
 

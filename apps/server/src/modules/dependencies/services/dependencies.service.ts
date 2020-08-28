@@ -16,10 +16,15 @@ export class DependenciesService {
 
   getAvailableRepositoriesForCompany(companyId: number, vcsServiceId: number): Promise<AvailableDependenciesEntity[]> {
     return this.availableDependenciesRepository
-      .createQueryBuilder('availableRepositories')
+      .createQueryBuilder('availableDependencies')
       .where(
-        'availableRepositories.companyId = :companyId AND availableRepositories.vcsServiceId = :vcsServiceId',
+        'availableDependencies.companyId = :companyId AND availableDependencies.vcsServiceId = :vcsServiceId',
         { companyId, vcsServiceId })
+      .select([
+        'availableDependencies.name',
+        'availableDependencies.minVersion',
+        'availableDependencies.isRequired'
+      ])
       .getMany();
   }
 
