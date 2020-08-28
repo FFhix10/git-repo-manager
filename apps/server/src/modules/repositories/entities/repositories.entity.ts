@@ -2,7 +2,8 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMan
 
 import { AccountEntity } from '../../account/entities/account.entity';
 import { BranchesEntity } from '../../auth/entities/branches.entity';
-import { UpdatedDependenciesEntity } from './updated-dependencies.entity';
+import { UpdatedDependenciesEntity } from '../../dependencies/entities/updated-dependencies.entity';
+import { CompanyEntity } from '../../company/entities/company.entity';
 
 @Entity('repositories')
 export class RepositoriesEntity {
@@ -39,4 +40,8 @@ export class RepositoriesEntity {
 
   @OneToMany(() => UpdatedDependenciesEntity, data => data.repository)
   updatedDependency: UpdatedDependenciesEntity;
+
+  @ManyToOne(() => CompanyEntity, data => data.repository)
+  @JoinColumn()
+  company: CompanyEntity;
 }

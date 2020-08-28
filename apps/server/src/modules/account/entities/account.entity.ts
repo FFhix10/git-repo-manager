@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToOne, Generated, JoinColumn, OneToMany } from 'typeorm';
 
 import { AccessTokensEntity } from './access-tokens.entity';
-import { AvailableDependenciesEntity } from '../../auth/entities/available-dependencies.entity';
+import { AvailableDependenciesEntity } from '../../dependencies/entities/available-dependencies.entity';
 import { BranchesEntity } from '../../auth/entities/branches.entity';
 import { CompanyEntity } from '../../company/entities';
 import { RepositoriesEntity } from '../../repositories/entities';

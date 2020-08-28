@@ -1,7 +1,12 @@
 import { RepositoriesEntity } from './repositories.entity';
-import { UpdatedDependenciesEntity } from './updated-dependencies.entity';
+import { CompanyEntity } from '../../company/entities';
+import { AvailableDependenciesEntity, UpdatedDependenciesEntity } from '../../dependencies/entities';
 
 export * from './repositories.entity';
-export * from './updated-dependencies.entity';
 
-export const REPOSITORIES_ENTITIES = [RepositoriesEntity];
+export const REPOSITORIES_ENTITIES = [
+  RepositoriesEntity,
+  CompanyEntity,
+  AvailableDependenciesEntity,
+  UpdatedDependenciesEntity
+];

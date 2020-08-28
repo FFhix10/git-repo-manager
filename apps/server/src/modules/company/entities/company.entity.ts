@@ -9,9 +9,10 @@ import {
 
 import { AccessTokensEntity } from '../../account/entities/access-tokens.entity';
 import { AccountEntity } from '../../account/entities/account.entity';
-import { AvailableDependenciesEntity } from '../../auth/entities/available-dependencies.entity';
+import { AvailableDependenciesEntity } from '../../dependencies/entities/available-dependencies.entity';
 import { BranchesEntity } from '../../auth/entities/branches.entity';
 import { VcsServicesEntity } from '../../auth/entities/vcs-services.entity';
+import { RepositoriesEntity } from '../../repositories/entities/repositories.entity';
 
 @Entity('company')
 export class CompanyEntity {
@@ -38,10 +39,10 @@ export class CompanyEntity {
   account: AccountEntity;
 
   @OneToMany(() => AvailableDependenciesEntity, data => data.company)
-  availableDependency: AvailableDependenciesEntity;
+  availableDependency: AvailableDependenciesEntity[];
 
   @OneToMany(() => BranchesEntity, data => data.company)
-  branches: BranchesEntity;
+  branches: BranchesEntity[];
 
   @OneToOne(() => AccessTokensEntity, data => data.company)
   accessToken: AccessTokensEntity;
@@ -49,4 +50,7 @@ export class CompanyEntity {
   @ManyToOne(() => VcsServicesEntity, data => data.company)
   @JoinColumn()
   vcsService: VcsServicesEntity;
+
+  @OneToMany(() => RepositoriesEntity, data => data.company)
+  repository: RepositoriesEntity[];
 }

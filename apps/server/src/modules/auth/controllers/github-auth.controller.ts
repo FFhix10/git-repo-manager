@@ -1,5 +1,4 @@
-import { Controller, Post, Get, Body, UseGuards, Req, Res, Next } from '@nestjs/common';
-import { GithubAuthService } from '../services/github-auth.service';
+import { Controller, Get, UseGuards, Req, Res, Next } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 
 import { authenticate } from 'passport';
@@ -12,7 +11,6 @@ import { AccountService } from '../../account/services';
 export class GithubAuthController {
 
   constructor(
-    private readonly githubAuth: GithubAuthService,
     private readonly accountService: AccountService
   ) {  }
 
@@ -59,11 +57,6 @@ export class GithubAuthController {
         }
       }
     )(req, res, next);
-  }
-
-  @Get('user')
-  async getUser(@Req() req) {
-    return await this.githubAuth.getUserInfo(req.cookies['_auth_token']);
   }
 
   @Get('isAuthenticated')

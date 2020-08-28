@@ -4,7 +4,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, SelectQueryBuilder } from 'typeorm';
 
 import { CompanyEntity } from '../entities';
-import { VcsServices } from '../models';
+import { VcsServicesNames} from '../../shared/models';
 
 @Injectable()
 export class CompanyService {
@@ -12,7 +12,7 @@ export class CompanyService {
   constructor(
     private readonly http: HttpService,
     @InjectRepository (CompanyEntity)
-    private readonly companyRepository: Repository<CompanyEntity>
+    private readonly companyRepository: Repository<CompanyEntity>,
   ) {}
 
   repository(): Repository<CompanyEntity> {
@@ -26,6 +26,14 @@ export class CompanyService {
       .getOne();
   }
 
+  getCompanies(accountId: number): Promise<CompanyEntity[]> {
+    return this.queryBuilder('cm')
+      .innerJoin('cm.account', 'account')
+      .where('account.id = :accountId', { accountId })
+      .select(['cm.uuid', 'cm.companyName', 'cm.email'])
+      .getMany();
+  }
+
   getAllUserCompaniesFromVcs(
     userName: string,
     vcsService: string,
@@ -34,7 +42,7 @@ export class CompanyService {
     let url;
 
     switch (vcsService) {
-      case VcsServices.GITHUB:
+      case VcsServicesNames.GITHUB:
         url = `https://api.github.com/user/orgs`;
         break;
       default:
@@ -60,7 +68,7 @@ export class CompanyService {
     let url;
 
     switch (vcsService) {
-      case VcsServices.GITHUB:
+      case VcsServicesNames.GITHUB:
         url = `https://api.github.com/orgs/${companyName}/memberships/${userName}`;
         break;
       default:
