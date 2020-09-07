@@ -1,17 +1,29 @@
 import { MiddlewareConsumer, Module, NestModule, RequestMethod } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { ClientSideMiddleware } from './middlewares/client-side.middleware';
 
-import { GithubRepositoriesModule } from './modules/github-repositories/github-repositories.module';
+import { AccountModule } from './modules/account/account.module';
+import { AuthModule } from './modules/auth/auth.module';
 import { ClientSideModule } from './modules/client-side/client-side.module';
-import { AuthModule } from './modules/authentication/auth.module';
+import { CompanyModule } from './modules/company/company.module';
+import { DependenciesModule } from './modules/dependencies/dependencies.module';
+import { RepositoriesModule } from './modules/repositories/repositories.module';
+import { SharedModule } from './modules/shared/shared.module';
+
+const MODULES = [
+  AccountModule,
+  AuthModule,
+  ClientSideModule,
+  CompanyModule,
+  RepositoriesModule,
+  DependenciesModule,
+  SharedModule,
+  TypeOrmModule.forRoot()
+];
 
 @Module({
-  imports: [
-    AuthModule,
-    ClientSideModule,
-    GithubRepositoriesModule,
-  ],
+  imports: MODULES,
   exports: [],
   providers: []
 })

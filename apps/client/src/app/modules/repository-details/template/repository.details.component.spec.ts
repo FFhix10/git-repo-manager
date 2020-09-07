@@ -17,7 +17,7 @@ import { TimestampPipe } from '../../../../shared/pipes/timestamp.pipe';
 import { HeaderModule } from '../../../../shared/header/header.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BsModalService, TypeaheadModule } from 'ngx-bootstrap';
-import { AuthService } from '../../user-authorization/services/auth.service';
+import { AuthService } from '../../auth/services/auth.service';
 import { MockLocalStorage } from '../../../../shared/mock/mock-local-storage';
 import { ListOfCustomBranches } from '../../../../shared/mock/mock-data';
 import { environment } from '../../../../environments/environment';
