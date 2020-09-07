@@ -6,11 +6,17 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { UserAuthorizationComponent } from './template/user-authorization.component';
 import { AUTH_SERVICES } from './services';
-import { CallbackComponent } from './containers';
+import { CallbackComponent, VcsServiceButtonComponent } from './containers';
+import { CommonModule } from '@angular/common';
 
 @NgModule({
-  declarations: [ UserAuthorizationComponent, CallbackComponent ],
+  declarations: [
+    UserAuthorizationComponent,
+    CallbackComponent,
+    VcsServiceButtonComponent
+  ],
   imports: [
+    CommonModule,
     HttpClientModule,
     AuthRoutingModule,
     ReactiveFormsModule

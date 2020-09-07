@@ -1,5 +1,8 @@
-@import '../../../../shared/scss/variables';
-@import '../../../../shared/scss/transition';
+@import '../../../../assets/scss/style';
+
+.container {
+  height: 100vh;
+}
 
 .form {
   border-radius: 10px;

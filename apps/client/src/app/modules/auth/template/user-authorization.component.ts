@@ -13,6 +13,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class UserAuthorizationComponent implements OnInit {
   public errText: string;
   public errCondition: boolean = false;
+  public names = ['github', 'gitlab'];
   public loginForm: FormGroup;
   public dataSource: FormGroup;
   public loginText: string = 'Choose organization and VCS';

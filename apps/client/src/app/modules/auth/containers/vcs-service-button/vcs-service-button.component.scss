@@ -1,0 +1,36 @@
+@import '../../../../../assets/scss/style';
+
+.vcs-btn {
+  width: 500px;
+  vertical-align: center;
+  margin-bottom: $gap-md;
+
+  &-icon {
+    justify-content: flex-start;
+    padding-right: $gap-lg;
+  }
+}
+
+.btn-border {
+  border-radius: $gap-xs;
+
+  @include transition(.33s);
+
+  &-github {
+    border: 2px solid $github-gray-200;
+
+    &:hover {
+      cursor: pointer;
+      border: 2px solid $github-gray-600;
+    }
+  }
+
+  &-gitlab {
+    border: 2px solid $gitlab-gray-100;
+
+    &:hover {
+      cursor: pointer;
+      border: 2px solid $gitlab-purple-700;
+    }
+  }
+}

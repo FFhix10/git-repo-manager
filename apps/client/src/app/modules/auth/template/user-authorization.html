@@ -1,4 +1,10 @@
-<form [formGroup]="loginForm" class="form">
+<div class="container d-flex flex-column align-items-center justify-content-center">
+  <div *ngFor="let name of names">
+    <vcs-service [vcsServiceName]="name"></vcs-service>
+  </div>
+</div>
+
+<!--<form [formGroup]="loginForm" class="form">
   <div class="form__header">
     <span class="form__header-text">
       Well Come!
@@ -41,4 +47,4 @@
     </div>
 
   </div>
-</form>
+</form>-->
