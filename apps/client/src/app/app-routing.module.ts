@@ -2,11 +2,16 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../shared/guards/auth.guard';
 import { RepositoryDetailsGuard } from '../shared/guards/repository-details.guard';
+import { AppComponent } from './app.component';
 
 export const appRoutes: Routes = [
   {
     path: '',
-    loadChildren: './modules/user-authorization/user-authorization.module#UserAuthorizationModule'
+    component: AppComponent
+  },
+  {
+    path: 'auth',
+    loadChildren: './modules/auth/auth.module#AuthModule'
   },
   {
     path: '',

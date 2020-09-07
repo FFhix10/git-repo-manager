@@ -1,4 +1,5 @@
 import { Injectable, ErrorHandler } from '@angular/core';
+import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
@@ -6,6 +7,7 @@ import { environment } from '../../../../environments/environment';
 import { NotificationService } from '../../../../shared/notifications/notification.service';
 import { LocalStorageService } from '../../../../shared/services/local-storage.service';
 import { StoreService } from '../../../../shared/services/store.service';
+import { RoutingURLs } from '../../core/constants';
 
 @Injectable()
 export class AuthService implements ErrorHandler {
@@ -15,7 +17,8 @@ export class AuthService implements ErrorHandler {
     private readonly http: HttpClient,
     private readonly notificationService: NotificationService,
     private readonly store: StoreService,
-    private readonly lsService: LocalStorageService
+    private readonly lsService: LocalStorageService,
+    private readonly router: Router
   ) {  }
 
   public authenticateUser(authData) {
@@ -43,9 +46,7 @@ export class AuthService implements ErrorHandler {
   }
 
   public logout() {
-    const { dataSource } = this.store.getAuthData();
-
     this.lsService.clear();
-    window.location.href = `${environment.url}/api/${dataSource}/logout`;
+    this.router.navigate([RoutingURLs.AUTH_LOGIN]);
   }
 }
