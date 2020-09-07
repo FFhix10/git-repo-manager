@@ -2,16 +2,20 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { UserAuthorizationComponent } from './template/user-authorization.component';
+import { CallbackComponent } from './containers';
 
 export const userAuthorizationRoutes: Routes = [
   {
     path: '',
-    pathMatch: 'full',
     redirectTo: 'login'
   },
   {
     path: 'login',
     component: UserAuthorizationComponent
+  },
+  {
+    path: 'callback',
+    component: CallbackComponent
   }
 ];
 
@@ -20,4 +24,4 @@ export const userAuthorizationRoutes: Routes = [
   exports: [ RouterModule ]
 })
 
-export class UserAuthorizationRoutingModule {  }
+export class AuthRoutingModule {  }

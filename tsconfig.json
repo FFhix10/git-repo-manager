@@ -23,5 +23,10 @@
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,
     "strictInjectionParameters": true
+  },
+  "paths": {
+    "@client/auth": ["./apps/client/src/app/modules/auth/*"],
+    "@client/core": ["./apps/client/src/app/modules/core/*"],
+    "@client/shared": ["./apps/client/src.shared"]
   }
 }

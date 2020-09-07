@@ -1,6 +1,9 @@
 import { Component, Input } from '@angular/core';
-import { AuthService } from '../../app/modules/user-authorization/services/auth.service';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../../app/modules/auth/services/auth.service';
 import { AuthDataInterface } from '../interfaces/auth-data.interface';
+import { RoutingURLs } from '../../app/modules/core/constants';
 
 @Component({
   selector: 'header',
@@ -14,7 +17,8 @@ export class HeaderComponent {
   @Input() userData: AuthDataInterface;
 
   constructor(
-    private readonly auth: AuthService
+    private readonly auth: AuthService,
+    private readonly router: Router
   ) {}
 
   public logout() {

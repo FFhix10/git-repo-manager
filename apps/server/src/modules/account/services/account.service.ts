@@ -95,4 +95,10 @@ export class AccountService {
   queryBuilder(alias: string): SelectQueryBuilder<AccountEntity> {
     return this.accountRepository.createQueryBuilder(alias);
   }
+
+  getAccountByToken(accessToken: string) {
+    const data = this.tokensService.decode(accessToken);
+
+    console.log(data);
+  }
 }

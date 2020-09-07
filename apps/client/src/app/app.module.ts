@@ -1,10 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-import { AppComponent } from './components/app/app.component';
-import { AppRoutingModule } from './app.routing.module';
+import { AppComponent } from './app.component';
+import { RootComponent } from './root.component';
+import { AppRoutingModule } from './app-routing.module';
 import { NotificationModule } from '../shared/notifications/notification.module';
-import { AuthService } from './modules/user-authorization/services/auth.service';
+import { AuthService } from './modules/auth/services/auth.service';
 import { HttpClientModule } from '@angular/common/http';
 
 import { AuthReducer } from '../shared/store/reducers/auth.reducer';
@@ -17,6 +18,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
+    RootComponent
   ],
   imports: [
     BrowserModule,
@@ -30,6 +32,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     }),
   ],
   providers: [ AuthService, DataService, RepositoriesDataService ],
-  bootstrap: [AppComponent]
+  bootstrap: [ RootComponent ]
 })
 export class AppModule { }
