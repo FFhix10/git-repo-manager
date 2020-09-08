@@ -1,5 +1,12 @@
-@import '../../../../shared/scss/variables';
-@import '../../../../shared/scss/transition';
+@import '../../../../assets/scss/style';
+
+.container {
+  height: 100vh;
+}
+
+.auth-header {
+  margin-bottom: $gap-xlg;
+}
 
 .form {
   border-radius: 10px;

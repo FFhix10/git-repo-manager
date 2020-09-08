@@ -1,0 +1,201 @@
+$black: #000000;
+$color-grey: #c5c5c5;
+$color-black: rgba(0,0,0,0.3);
+$color-light-black: rgba(255,255,255,0.1);
+$color-hover-black: rgba(0,0,0,0.5);
+$color-danger: rgba(150, 0, 0, 0.7);
+$color-hover-danger: rgba(203, 0, 0, 0.83);
+$color-public: rgba(9, 37, 166, 0.7);
+$color-hover-public: rgba(12, 54, 255, 0.7);
+$color-private: rgba(163, 162, 166, 0.7);
+$color-hover-private: rgba(252, 250, 255, 0.7);
+$color-white: rgb(255, 255, 255);
+$color-row-before: rgba(33, 68, 134, 0.7);
+$color-row-before-active: rgba(53, 146, 255, 0.7);
+$color-row-before-danger: rgba(115, 0, 0, 0.7);
+$color-success: rgba(24, 195, 0, 0.81);
+$color-input: rgba(255, 255, 255, 0.65);
+$color-input-focus: rgba(150, 150, 150, 0.77);
+$button-bg: rgb(0, 64, 126);
+$button-bg-hover: rgb(0, 83, 168);
+
+// GitHub
+$github-gray-000: #fafbfc;
+$github-gray-100: #f6f8fa;
+$github-gray-200: #e1e4e8;
+$github-gray-300: #d1d5da;
+$github-gray-400: #959da5;
+$github-gray-500: #6a737d;
+$github-gray-600: #586069;
+$github-gray-700: #444d56;
+$github-gray-800: #2f363d;
+$github-gray-900: #24292e;
+
+$github-blue-000: #f1f8ff;
+$github-blue-100: #dbedff;
+$github-blue-200: #c8e1ff;
+$github-blue-300: #79b8ff;
+$github-blue-400: #2188ff;
+$github-blue-500: #0366d6;
+$github-blue-600: #005cc5;
+$github-blue-700: #044289;
+$github-blue-800: #032f62;
+$github-blue-900: #05264c;
+
+$github-green-000: #f0fff4;
+$github-green-100: #dcffe4;
+$github-green-200: #bef5cb;
+$github-green-300: #85e89d;
+$github-green-400: #34d058;
+$github-green-500: #28a745;
+$github-green-600: #22863a;
+$github-green-700: #176f2c;
+$github-green-800: #165c26;
+$github-green-900: #144620;
+
+$github-yellow-000: #fffdef;
+$github-yellow-000: #fffbdd;
+$github-yellow-000: #fff5b1;
+$github-yellow-000: #ffea7f;
+$github-yellow-000: #ffdf5d;
+$github-yellow-000: #ffd33d;
+$github-yellow-000: #f9c513;
+$github-yellow-000: #dbab09;
+$github-yellow-000: #b08800;
+$github-yellow-000: #735c0f;
+
+$github-orange-000: #fff8f2;
+$github-orange-100: #ffebda;
+$github-orange-200: #ffab70;
+$github-orange-300: #ffab70;
+$github-orange-400: #fb8532;
+$github-orange-500: #f66a0a;
+$github-orange-600: #e36209;
+$github-orange-700: #d15704;
+$github-orange-800: #c24e00;
+$github-orange-900: #a04100;
+
+$github-red-000: #ffeef0;
+$github-red-100: #ffdce0;
+$github-red-200: #fdaeb7;
+$github-red-300: #f97583;
+$github-red-400: #ea4a5a;
+$github-red-500: #d73a49;
+$github-red-600: #cb2431;
+$github-red-700: #b31d28;
+$github-red-800: #9e1c23;
+$github-red-900: #86181d;
+
+$github-purple-000: #f5f0ff;
+$github-purple-100: #e6dcfd;
+$github-purple-200: #d1bcf9;
+$github-purple-300: #b392f0;
+$github-purple-400: #8a63d2;
+$github-purple-500: #6f42c1;
+$github-purple-600: #5a32a3;
+$github-purple-700: #4c2889;
+$github-purple-800: #3a1d6e;
+$github-purple-900: #29134e;
+
+$github-black-fade-15: rgba(27, 31, 35, 0.15);
+$github-black-fade-30: rgba(27, 31, 35, 0.3);
+$github-black-fade-50: rgba(27, 31, 35, 0.5);
+$github-black-fade-70: rgba(27, 31, 35, 0.7);
+$github-black-fade-85: rgba(27, 31, 35, 0.85);
+
+$github-white-fade-15: rgba(255, 255, 255, 0.15);
+$github-white-fade-30: rgba(255, 255, 255, 0.3);
+$github-white-fade-50: rgba(255, 255, 255, 0.5);
+$github-white-fade-70: rgba(255, 255, 255, 0.7);
+$github-white-fade-85: rgba(255, 255, 255, 0.85);
+
+// GitLab
+$gitlab-gray-10: #fafafa;
+$gitlab-gray-50: #f0f0f0;
+$gitlab-gray-100: #dbdbdb;
+$gitlab-gray-200: #bfbfbf;
+$gitlab-gray-300: #999999;
+$gitlab-gray-400: #868686;
+$gitlab-gray-500: #666666;
+$gitlab-gray-600: #5e5e5e;
+$gitlab-gray-700: #525252;
+$gitlab-gray-800: #404040;
+$gitlab-gray-900: #303030;
+$gitlab-gray-950: #1f1f1f;
+
+$gitlab-blue-50: #e9f3fc;
+$gitlab-blue-100: #cbe2f9;
+$gitlab-blue-200: #9dc7f1;
+$gitlab-blue-300: #63a6e9;
+$gitlab-blue-400: #428fdc;
+$gitlab-blue-500: #1f75cb;
+$gitlab-blue-600: #1068bf;
+$gitlab-blue-700: #0b5cad;
+$gitlab-blue-800: #064787;
+$gitlab-blue-900: #033464;
+$gitlab-blue-950: #002850;
+
+$gitlab-green-50: #ecf4ee;
+$gitlab-green-100: #c3e6cd;
+$gitlab-green-200: #91d4a8;
+$gitlab-green-300: #52b87a;
+$gitlab-green-400: #2da160;
+$gitlab-green-500: #108548;
+$gitlab-green-600: #217645;
+$gitlab-green-700: #24663b;
+$gitlab-green-800: #0d532a;
+$gitlab-green-900: #0a4020;
+$gitlab-green-950: #072b15;
+
+$gitlab-orange-50: #fdf1dd;
+$gitlab-orange-100: #f5d9a8;
+$gitlab-orange-200: #e9be74;
+$gitlab-orange-300: #d99530;
+$gitlab-orange-400: #c17d10;
+$gitlab-orange-500: #ab6100;
+$gitlab-orange-600: #9e5400;
+$gitlab-orange-700: #8f4700;
+$gitlab-orange-800: #703800;
+$gitlab-orange-900: #5c2900;
+$gitlab-orange-950: #421f00;
+
+$gitlab-red-50: #fcf1ef;
+$gitlab-red-100: #fdd4cd;
+$gitlab-red-200: #fcb5aa;
+$gitlab-red-300: #f57f6c;
+$gitlab-red-400: #ec5941;
+$gitlab-red-500: #dd2b0e;
+$gitlab-red-600: #c91c00;
+$gitlab-red-700: #ae1800;
+$gitlab-red-800: #8d1300;
+$gitlab-red-900: #660e00;
+$gitlab-red-950: #4d0a00;
+
+$gitlab-purple-50: #f4f0ff;
+$gitlab-purple-100: #e1d8f9;
+$gitlab-purple-200: #cbbbf2;
+$gitlab-purple-300: #ac93e6;
+$gitlab-purple-400: #9475db;
+$gitlab-purple-500: #7b58cf;
+$gitlab-purple-600: #6b51b8;
+$gitlab-purple-700: #5943b6;
+$gitlab-purple-800: #453894;
+$gitlab-purple-900: #2f2a6b;
+$gitlab-purple-950: #232150;
+
+$gitlab-t-gray-a-02: rgba($black, 0.02);
+$gitlab-t-gray-a-04: rgba($black, 0.04);
+$gitlab-t-gray-a-06: rgba($black, 0.06);
+$gitlab-t-gray-a-08: rgba($black, 0.08);
+$gitlab-t-gray-a-24: rgba($black, 0.24);
+
+
+// GAPs
+$gap-xs: 4px;
+$gap-sm: 8px;
+$gap-md: 16px;
+$gap-lg: 24px;
+$gap-xlg: 32px;
+
+$diameter: 2em;
+$timeset: 1.5s;

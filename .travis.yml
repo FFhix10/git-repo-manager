@@ -35,8 +35,6 @@ addons:
 jobs:
   fast_finish: true
   include:
-    - stage: Client - unit tests
-      script: npm run test
     - stage: Deploy
       script: echo "Start deploying"
       deploy:

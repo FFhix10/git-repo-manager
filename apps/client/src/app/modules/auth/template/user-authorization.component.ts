@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { LocalStorageService } from '../../../../shared/services/local-storage.service';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { LoadingSpinnerService } from '../../core/services/loading-spinner.service';
 
 @Component({
   selector: 'app-user-authorization',
@@ -13,6 +14,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class UserAuthorizationComponent implements OnInit {
   public errText: string;
   public errCondition: boolean = false;
+  public names = ['github', 'gitlab'];
   public loginForm: FormGroup;
   public dataSource: FormGroup;
   public loginText: string = 'Choose organization and VCS';
@@ -21,7 +23,8 @@ export class UserAuthorizationComponent implements OnInit {
     private readonly router: Router,
     private readonly auth: AuthService,
     private readonly formBuilder: FormBuilder,
-    private readonly lsService: LocalStorageService
+    private readonly lsService: LocalStorageService,
+    private readonly loading: LoadingSpinnerService
   ) {  }
 
   ngOnInit(): void {
@@ -45,9 +48,8 @@ export class UserAuthorizationComponent implements OnInit {
         break;
     }
   }
-  public login() {
-    document.getElementById('LoginButton').setAttribute('disabled', 'disabled');
-    this.loginText = 'Loading...';
-    return this.auth.authenticateUser(this.loginForm.value);
+  public login(event: string) {
+    this.loading.show();
+    return this.auth.authenticateUser(event);
   }
 }
