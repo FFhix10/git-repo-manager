@@ -1,11 +1,37 @@
+$transition-params:
+  color,
+  width,
+  border,
+  height,
+  filter,
+  padding,
+  opacity,
+  overflow,
+  font-size,
+  max-width,
+  transform,
+  box-shadow,
+  text-align,
+  margin-top,
+  white-space,
+  margin-bottom,
+  text-overflow,
+  background-color,
+  background-color,
+  -input-placeholder;
+
+$transition-webkit-params: -webkit-transform, -webkit-input-placeholder, -webkit-filter;
+$transition-moz-params: -moz-transform, -moz-input-placeholder, -moz-filter;
+$transition-o-params: -o-transform, -o-input-placeholder, -o-filter;
+
 @mixin transition($duration: 0) {
   -webkit-transition-duration: $duration;
   -moz-transition-duration: $duration;
   -o-transition-duration: $duration;
   transition-duration: $duration;
 
-  -webkit-transition-property: font-size, color, background-color, max-width, border, overflow, text-overflow, white-space, padding, background-color, height, width, margin-top, margin-bottom, box-shadow, -webkit-transform, text-align, opacity, color, -webkit-input-placeholder;
-  -moz-transition-property: font-size, color, background-color, max-width, border, overflow, text-overflow, white-space, padding, background-color, height, width, margin-top, margin-bottom, box-shadow, -moz-transform, text-align, opacity, color,  -moz-placeholder;
-  -o-transition-property: font-size, color, background-color, max-width, border, overflow, text-overflow, white-space, padding, background-color, height, width, margin-top, margin-bottom, box-shadow, -o-transform, text-align, opacity, color , -o-placeholder;
-  transition-property: font-size, color, background-color, max-width, border, overflow, text-overflow, white-space, padding, background-color, height, width, margin-top, margin-bottom, box-shadow, transform, text-align, opacity, color, -input-placeholder;
+  -webkit-transition-property: $transition-params, $transition-webkit-params;
+  -moz-transition-property: $transition-params $transition-moz-params;
+  -o-transition-property: $transition-params, $transition-o-params;
+  transition-property: $transition-params;
 }

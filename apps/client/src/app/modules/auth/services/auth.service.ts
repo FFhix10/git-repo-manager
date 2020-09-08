@@ -21,10 +21,8 @@ export class AuthService implements ErrorHandler {
     private readonly router: Router
   ) {  }
 
-  public authenticateUser(authData) {
-    this.lsService.setItem('org', authData.organization);
-    this.lsService.setItem('source', authData.dataSource);
-    window.location.href = `${environment.url}/api/${authData.dataSource}/login`;
+  public authenticateUser(url: string) {
+    window.location.href = url;
   }
 
   public check(): Observable<any> {
@@ -47,6 +45,6 @@ export class AuthService implements ErrorHandler {
 
   public logout() {
     this.lsService.clear();
-    this.router.navigate([RoutingURLs.AUTH_LOGIN]);
+    this.router.navigate([RoutingURLs.APP_ROOT]);
   }
 }

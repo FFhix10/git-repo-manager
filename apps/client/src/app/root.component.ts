@@ -2,7 +2,8 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  template: `    
+  template: `
+    <loading-spinner></loading-spinner>
     <notifications></notifications>
     <router-outlet></router-outlet>
   `

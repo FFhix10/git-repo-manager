@@ -22,6 +22,10 @@ export class FiltrationService {
   }
 
   public clearFilters() {
+    if (this.filteringOptions.length === 0) {
+      return;
+    }
+
     this.filteringOptions.length = 0;
     return this.filterData(this.filteringOptions);
   }
@@ -54,6 +58,9 @@ export class FiltrationService {
   }
 
   public filterData(filteringOptions: FilteringOptionsInterface[]) {
+    if (!this.repositories.length) {
+      return;
+    }
 
     const filteredOptions = this.repositories.filter((repository: RepositoryInterface) => {
       const { branches } = repository;

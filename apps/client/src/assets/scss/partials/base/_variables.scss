@@ -1,5 +1,5 @@
 $black: #000000;
-$color-grey: rgba(255,255,255,0.3);
+$color-grey: #c5c5c5;
 $color-black: rgba(0,0,0,0.3);
 $color-light-black: rgba(255,255,255,0.1);
 $color-hover-black: rgba(0,0,0,0.5);
@@ -9,7 +9,7 @@ $color-public: rgba(9, 37, 166, 0.7);
 $color-hover-public: rgba(12, 54, 255, 0.7);
 $color-private: rgba(163, 162, 166, 0.7);
 $color-hover-private: rgba(252, 250, 255, 0.7);
-$color-white: rgba(255, 255, 255, 255);
+$color-white: rgb(255, 255, 255);
 $color-row-before: rgba(33, 68, 134, 0.7);
 $color-row-before-active: rgba(53, 146, 255, 0.7);
 $color-row-before-danger: rgba(115, 0, 0, 0.7);
@@ -196,3 +196,6 @@ $gap-sm: 8px;
 $gap-md: 16px;
 $gap-lg: 24px;
 $gap-xlg: 32px;
+
+$diameter: 2em;
+$timeset: 1.5s;

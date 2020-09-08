@@ -1,36 +1,80 @@
 @import '../../../../../assets/scss/style';
 
 .vcs-btn {
-  width: 500px;
-  vertical-align: center;
+  width: 400px;
+  height: $gap-lg * 2;
   margin-bottom: $gap-md;
+  position: relative;
+  display: block;
+  user-select: none;
 
   &-icon {
-    justify-content: flex-start;
+    left: $gap-lg;
+    position: absolute;
     padding-right: $gap-lg;
+    -webkit-filter: grayscale(100%);
+    -moz-filter: grayscale(100%);
+    -o-filter: grayscale(100%);
+    filter: grayscale(100%);
+
+    @include transition(.3s);
+  }
+
+  &-text {
+    font-size: $gap-md*1.2;
+    color: $color-grey;
+    height: $gap-md;
+
+    p {
+      margin: 0;
+      @include transition(.35s);
+    }
   }
 }
 
 .btn-border {
   border-radius: $gap-xs;
+  border: 2px solid $color-grey;
 
-  @include transition(.33s);
+  @include transition(.35s);
 
   &-github {
-    border: 2px solid $github-gray-200;
-
     &:hover {
       cursor: pointer;
       border: 2px solid $github-gray-600;
+
+      p {
+        color: $github-gray-600;
+      }
+
+      .vcs-btn-icon {
+        -webkit-filter: none;
+        -moz-filter: none;
+        -o-filter: none;
+        filter: none;
+      }
+
+      @include transition(.35s);
     }
   }
 
   &-gitlab {
-    border: 2px solid $gitlab-gray-100;
-
     &:hover {
       cursor: pointer;
       border: 2px solid $gitlab-purple-700;
+
+      p {
+        color: $gitlab-purple-700;
+      }
+
+      .vcs-btn-icon {
+        -webkit-filter: none;
+        -moz-filter: none;
+        -o-filter: none;
+        filter: none;
+      }
+
+      @include transition(.35s);
     }
   }
 }

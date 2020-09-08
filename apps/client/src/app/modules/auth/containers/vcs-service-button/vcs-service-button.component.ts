@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import { VcsServicesNames } from '../../../../../../../server/src/modules/shared/models';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'vcs-service',
@@ -12,6 +13,7 @@ export class VcsServiceButtonComponent {
   private name: string;
   private alias: string;
 
+  @Output() readonly authenticateVia = new EventEmitter<string>();
   @Input() set vcsServiceName(name: string) {
     this.alias = name;
 
@@ -28,5 +30,20 @@ export class VcsServiceButtonComponent {
         this.name = undefined;
         break;
     }
+  }
+
+  selectVscServiceToAuth(vcsService: string): void {
+    let url: string;
+
+    switch (vcsService) {
+      case VcsServicesNames.GITHUB:
+        url = `${environment.url}/api/${vcsService}/login`;
+        break;
+
+      default:
+        return undefined;
+    }
+
+    this.authenticateVia.emit(url);
   }
 }

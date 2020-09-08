@@ -7,6 +7,7 @@ import { StoreService } from '../../../../shared/services/store.service';
 import { LocalStorageService } from '../../../../shared/services/local-storage.service';
 import { FiltrationService } from '../services/filtration.service';
 import { Router } from '@angular/router';
+import { LoadingSpinnerService } from '../../core/services/loading-spinner.service';
 
 @Component({
   selector: 'app-valor-projects',
@@ -27,7 +28,8 @@ export class CompanyProjectsComponent implements OnInit, OnDestroy {
     private readonly repositoriesService: DataService,
     private readonly router: Router,
     private readonly filterService: FiltrationService,
-    private readonly lsService: LocalStorageService
+    private readonly lsService: LocalStorageService,
+    private readonly loading: LoadingSpinnerService
   ) {
     this.authData = this.store.getAuthData();
   }
@@ -40,6 +42,7 @@ export class CompanyProjectsComponent implements OnInit, OnDestroy {
 
     this.lsService.removeItem('repository');
     this.getUserData();
+    this.loading.hide();
   }
 
   ngOnDestroy(): void {
