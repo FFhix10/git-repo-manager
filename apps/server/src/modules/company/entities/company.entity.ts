@@ -8,11 +8,11 @@ import {
 } from 'typeorm';
 
 import { AccessTokensEntity } from '../../account/entities/access-tokens.entity';
-import { AccountEntity } from '../../account/entities/account.entity';
 import { AvailableDependenciesEntity } from '../../dependencies/entities/available-dependencies.entity';
 import { BranchesEntity } from '../../auth/entities/branches.entity';
-import { VcsServicesEntity } from '../../auth/entities/vcs-services.entity';
+import { VcsServicesEntity } from '../../vcs-services/entities/vcs-services.entity';
 import { RepositoriesEntity } from '../../repositories/entities/repositories.entity';
+import { AccountCompanyEntity } from '../../account/entities/account-company.entity';
 
 @Entity('company')
 export class CompanyEntity {
@@ -35,9 +35,6 @@ export class CompanyEntity {
   @Column({ type: 'int', nullable: false })
   vcsServiceId: number;
 
-  @OneToMany(() => AccountEntity, data => data.company)
-  account: AccountEntity;
-
   @OneToMany(() => AvailableDependenciesEntity, data => data.company)
   availableDependency: AvailableDependenciesEntity[];
 
@@ -53,4 +50,7 @@ export class CompanyEntity {
 
   @OneToMany(() => RepositoriesEntity, data => data.company)
   repository: RepositoriesEntity[];
+
+  @OneToMany(() => AccountCompanyEntity, data => data.company)
+  accountCompany: AccountCompanyEntity[];
 }

@@ -3,7 +3,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
 import { CompanyEntity } from '../../company/entities/company.entity';
 import { AccessTokensEntity } from '../../account/entities/access-tokens.entity';
 import { AvailableDependenciesEntity } from '../../dependencies/entities/available-dependencies.entity';
-import { BranchesEntity } from './branches.entity';
+import { BranchesEntity } from '../../auth/entities/branches.entity';
 
 @Entity('vcsServices')
 export class VcsServicesEntity {

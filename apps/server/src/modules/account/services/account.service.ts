@@ -4,10 +4,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, SelectQueryBuilder } from 'typeorm';
 import { v4 } from 'uuid';
 
+import { VcsServicesNames } from '../../shared/models';
 import { AccessTokensEntity, AccountEntity } from '../entities';
 import { CompanyService } from '../../company/services';
-import { AccessTokenService } from './access-token.service';
 import { TokensService } from '../../auth/services/tokens.service';
+import { VcsServicesService } from '../../vcs-services/services/vcs-services.service';
+import { AccessTokenService } from './access-token.service';
+import { AccountCompanyService } from './account-company.service';
+import { AccountTypes, GetAccount } from '../models';
 
 @Injectable()
 export class AccountService {
@@ -17,7 +21,9 @@ export class AccountService {
     private readonly accountRepository: Repository<AccountEntity>,
     private readonly companyService: CompanyService,
     private readonly accessTokensService: AccessTokenService,
-    private readonly tokensService: TokensService
+    private readonly tokensService: TokensService,
+    private readonly vcsServicesService: VcsServicesService,
+    private readonly accountCompanyService: AccountCompanyService
   ) {}
 
   repository(): Repository<AccountEntity> {
@@ -33,11 +39,12 @@ export class AccountService {
   }): Promise<{ accessToken: string; expiresAt: number }> {
     const { name, email, userName, vcsId, accessToken } = data;
     let  account = await this.getAccountByVcsId(vcsId);
+    let accountCompanies = [];
 
     const allAvailableCompanies = await this.companyService
       .getAllUserCompaniesFromVcs(
         userName,
-        'github',
+        VcsServicesNames.GITHUB,
         accessToken
       ).then(companies => companies.data.reduce((pv, cv, index, array) => {
         if (index + 1 === array.length) {
@@ -47,8 +54,11 @@ export class AccountService {
         return `cm.vcsId = ${cv.id} AND cm.companyName = '${cv.login}' OR `;
       }, ''));
 
-    const company = await this.companyService
-      .getCompanyByOptions(allAvailableCompanies, ['cm.id', 'cm.companyName']);
+    const companies = await this.companyService
+      .queryBuilder('cm')
+      .where(allAvailableCompanies)
+      .select(['cm.id', 'cm.companyName'])
+      .getMany();
 
     if (!account) {
       const entity = this.accountRepository.create({
@@ -56,18 +66,37 @@ export class AccountService {
         name,
         email,
         username: userName,
-        vcsId,
-        company
+        vcsId
       });
 
       account = await this.accountRepository.save(entity);
+
+      for (const company of companies) {
+        const accountCompany = await this.accountCompanyService
+          .queryBuilder('accountCompany')
+          .where(
+            'accountCompany.accountId = :accountId AND accountCompany.companyId = :companyId',
+            { accountId: account.id, company: company.id }
+          )
+          .getOne();
+
+        if (!accountCompany) {
+          accountCompanies.push({
+            accountId: account.id,
+            companyId: company.id
+          });
+        }
+      }
+
+      if (accountCompanies.length > 0) {
+        this.accountCompanyService.addNewRelations(accountCompanies);
+      }
 
       await this.accessTokensService
         .create({
           token: accessToken,
           isCompanyAccessToken: false,
           account,
-          company,
           vcsServiceId: 1
         } as AccessTokensEntity);
     }
@@ -79,15 +108,13 @@ export class AccountService {
     return this.queryBuilder('account')
       .where('account.vcsId = :vcsId', { vcsId })
       .innerJoin('account.accessToken', 'accessToken')
-      .innerJoin('account.company', 'company')
       .select([
         'account.id',
         'account.name',
         'account.email',
         'account.vcsId',
         'account.username',
-        'accessToken.token',
-        'company.companyName'
+        'accessToken.token'
       ])
       .getOne();
   }
@@ -96,9 +123,56 @@ export class AccountService {
     return this.accountRepository.createQueryBuilder(alias);
   }
 
-  getAccountByToken(accessToken: string) {
+  async getAccountByToken(accessToken: string, vcsService: string): Promise<GetAccount> {
     const data = this.tokensService.decode(accessToken);
 
-    console.log(data);
+    const { id } = await this.vcsServicesService.getVcsServiceIdByName(vcsService);
+
+    return this.queryBuilder('account')
+      .where(
+        'account.vcsId = :vcsId',
+        { vcsId: +data.vcsId })
+      .leftJoin('account.accountCompany', 'accountCompany')
+      .innerJoin(
+        'accountCompany.company',
+        'company',
+        'company.vcsServiceId = :id',
+        { id }
+        )
+      .select([
+        'account.id',
+        'account.uuid',
+        'account.name',
+        'account.userName',
+        'account.email',
+        'account.role',
+        'account.vcsId',
+
+        'accountCompany.id',
+
+        'company.uuid',
+        'company.companyName',
+        'company.vcsId',
+        'company.email'
+      ])
+      .getOne()
+      .then(account => {
+        const companies = account.accountCompany.map(accountCompanyObj => ({
+          uuid: accountCompanyObj.company.uuid,
+          companyName: accountCompanyObj.company.companyName,
+          email: accountCompanyObj.company.email,
+          vcsId: +accountCompanyObj.company.vcsId
+        }));
+
+        return {
+          uuid: account.uuid,
+          name: account.name,
+          userName: account.username,
+          email: account.email,
+          role: account.role,
+          vcsId: +account.vcsId,
+          companies
+        } as GetAccount;
+      });
   }
 }

@@ -50,7 +50,7 @@ export class GithubAuthController {
           const { accessToken: authAccessToken, expiresAt } = await this.accountService
             .addAccount({ name, email, userName, vcsId, accessToken });
 
-          return res.redirect(`../../auth/callback/?accessToken=${authAccessToken}&expiresAt=${expiresAt}`);
+          return res.redirect(`../../auth/callback/?accessToken=${authAccessToken}&expiresAt=${expiresAt}&vcsService=github`);
         } catch (error) {
           console.error(error);
           return res.redirect('back');

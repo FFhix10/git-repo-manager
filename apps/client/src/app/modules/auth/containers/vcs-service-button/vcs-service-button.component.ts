@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
-import { VcsServicesNames } from '../../../../../../../server/src/modules/shared/models';
 import { environment } from '../../../../../environments/environment';
+import { VcsServicesNames } from '../../../core/models';
 
 @Component({
   selector: 'vcs-service',

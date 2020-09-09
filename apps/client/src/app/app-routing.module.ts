@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from '../shared/guards/auth.guard';
 import { RepositoryDetailsGuard } from '../shared/guards/repository-details.guard';
 import { AppComponent } from './app.component';
+import { AccountResolverGuard } from './modules/core/guards/account-resolver.guard';
 
 export const appRoutes: Routes = [
   {
@@ -14,12 +15,12 @@ export const appRoutes: Routes = [
     loadChildren: './modules/auth/auth.module#AuthModule'
   },
   {
-    path: '',
-    // canActivate: [ AuthGuard ],
+    path: 'repositories',
+    // canActivate: [ AccountResolverGuard ],
     loadChildren: './modules/company-projects/company-projects.module#CompanyProjectsModule'
   },
   {
-    path: '',
+    path: 'repositories/:repository',
     // canActivate: [ AuthGuard, RepositoryDetailsGuard ],
     loadChildren: './modules/repository-details/repository-details.module#RepositoryDetailsModule'
   }

@@ -8,6 +8,7 @@ import { LocalStorageService } from '../../../../shared/services/local-storage.s
 import { FiltrationService } from '../services/filtration.service';
 import { Router } from '@angular/router';
 import { LoadingSpinnerService } from '../../core/services/loading-spinner.service';
+import { AccountQuery } from '../../auth/states/account';
 
 @Component({
   selector: 'app-valor-projects',
@@ -29,9 +30,13 @@ export class CompanyProjectsComponent implements OnInit, OnDestroy {
     private readonly router: Router,
     private readonly filterService: FiltrationService,
     private readonly lsService: LocalStorageService,
-    private readonly loading: LoadingSpinnerService
+    private readonly loading: LoadingSpinnerService,
+    private readonly accountQuery: AccountQuery
   ) {
     this.authData = this.store.getAuthData();
+    this.accountQuery.account$.subscribe(res => {
+      console.log(res);
+    });
   }
 
   ngOnInit() {

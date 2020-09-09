@@ -73,6 +73,8 @@
     "@angular/cli": "8.2.0",
     "@angular/compiler-cli": "8.2.0",
     "@angular/language-service": "8.2.0",
+    "@datorama/akita": "5.2.3",
+    "@datorama/akita-ngdevtools": "5.0.3",
     "@nestjs/testing": "5.1.0",
     "@types/cron": "1.7.1",
     "@types/express": "4.16.0",

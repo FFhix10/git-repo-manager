@@ -11,7 +11,7 @@ export class ClientSideMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: Function): any {
     let { url } = req;
 
-    if (url.indexOf('api') > 0) {
+    if (url.indexOf('api') >= 0) {
       return next();
     } else if (allowedExt.filter(ext => url.indexOf(ext) > 0).length > 0) {
       const urlPath = url.split('\n');

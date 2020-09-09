@@ -14,6 +14,6 @@ export class AccountService {
   getAccountData(accessToken: string) {
     const params: HttpParams = new HttpParams({ fromObject: { access_token: accessToken } });
 
-    return this.http.get(`${appUrl}/api/account`, { params }).subscribe();
+    return this.http.get(`${appUrl}/api/account`, { params });
   }
 }

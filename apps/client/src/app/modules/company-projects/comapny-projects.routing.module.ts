@@ -5,8 +5,14 @@ import { CompanyProjectsComponent } from './template/company-projects.component'
 
 export const valorProjectsRoute: Routes = [
   {
-    path: 'repositories',
-    component: CompanyProjectsComponent
+    path: '',
+    component: CompanyProjectsComponent,
+    children: [
+      {
+        path: '',
+        redirectTo: '/repositories'
+      }
+    ]
   }
 ];
 

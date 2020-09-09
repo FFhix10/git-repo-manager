@@ -2,12 +2,12 @@ import { Injectable, ErrorHandler } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
 import { environment } from '../../../../environments/environment';
 import { NotificationService } from '../../../../shared/notifications/notification.service';
 import { LocalStorageService } from '../../../../shared/services/local-storage.service';
 import { StoreService } from '../../../../shared/services/store.service';
 import { RoutingURLs } from '../../core/constants';
+import { FreshTokens } from '../../core/models';
 
 @Injectable()
 export class AuthService implements ErrorHandler {
@@ -46,5 +46,17 @@ export class AuthService implements ErrorHandler {
   public logout() {
     this.lsService.clear();
     this.router.navigate([RoutingURLs.APP_ROOT]);
+  }
+
+  parseFreshTokens(tokens: FreshTokens): void {
+    const { accessToken, expiresAt, vcsService } = tokens;
+
+    if (!accessToken || !expiresAt || !vcsService) {
+      throw new Error(`Can't parse tokens: insufficient data`);
+    }
+
+    this.lsService.setItem('access_token', accessToken);
+    this.lsService.setItem('expires_at', expiresAt);
+    this.lsService.setItem('vcs_service', vcsService);
   }
 }
