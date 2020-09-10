@@ -25,7 +25,7 @@ export class AppComponent {
       .subscribe(
         () => {
           if (this.account) {
-            return this.router.navigateByUrl(RoutingURLs.REPOSITORIES);
+            return this.router.navigateByUrl(RoutingURLs.COMPANIES_LIST);
           }
 
           return this.router.navigateByUrl(RoutingURLs.AUTH_LOGIN);

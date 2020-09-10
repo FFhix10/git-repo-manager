@@ -6,13 +6,7 @@ import { CompanyProjectsComponent } from './template/company-projects.component'
 export const valorProjectsRoute: Routes = [
   {
     path: '',
-    component: CompanyProjectsComponent,
-    children: [
-      {
-        path: '',
-        redirectTo: '/repositories'
-      }
-    ]
+    component: CompanyProjectsComponent
   }
 ];
 

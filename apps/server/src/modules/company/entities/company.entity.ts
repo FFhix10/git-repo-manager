@@ -35,6 +35,9 @@ export class CompanyEntity {
   @Column({ type: 'int', nullable: false })
   vcsServiceId: number;
 
+  @Column({ type: 'varchar', length: 255, nullable: false })
+  logoUrl: string;
+
   @OneToMany(() => AvailableDependenciesEntity, data => data.company)
   availableDependency: AvailableDependenciesEntity[];
 

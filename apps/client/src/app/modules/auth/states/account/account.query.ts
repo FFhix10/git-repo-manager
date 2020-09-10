@@ -9,6 +9,7 @@ import { Account } from '../../../core/models';
 @Injectable({ providedIn: 'root' })
 export class AccountQuery extends Query<Account> {
   account$ = this.select();
+  accountCompanies$ = this.select('companies');
 
   constructor(protected readonly store: AccountStore) {
     super(store);

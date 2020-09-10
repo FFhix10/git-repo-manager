@@ -1,14 +1,17 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
+
+import { BehaviorSubject } from 'rxjs';
+
 import { HelpersService } from '../services/helpers.service';
 import { DataService } from '../../../../shared/services/data.service';
-import { BehaviorSubject } from 'rxjs';
 import { PackageInfoInterface } from '../interfaces/package-info.interface';
 import { StoreService } from '../../../../shared/services/store.service';
 import { LocalStorageService } from '../../../../shared/services/local-storage.service';
 import { FiltrationService } from '../services/filtration.service';
-import { Router } from '@angular/router';
 import { LoadingSpinnerService } from '../../core/services/loading-spinner.service';
-import { AccountQuery } from '../../auth/states/account';
+import { RoutingURLs } from '../../core/constants';
 
 @Component({
   selector: 'app-valor-projects',
@@ -31,12 +34,16 @@ export class CompanyProjectsComponent implements OnInit, OnDestroy {
     private readonly filterService: FiltrationService,
     private readonly lsService: LocalStorageService,
     private readonly loading: LoadingSpinnerService,
-    private readonly accountQuery: AccountQuery
+    private readonly route: ActivatedRoute
   ) {
     this.authData = this.store.getAuthData();
-    this.accountQuery.account$.subscribe(res => {
-      console.log(res);
-    });
+
+    const { vcsId } = this.route.snapshot.queryParams;
+    const { uuid } = this.route.snapshot.params;
+
+    if (!vcsId || vcsId === 'undefined' || vcsId === 'null' || !uuid || uuid === 'undefined' || uuid === 'null') {
+      this.router.navigateByUrl(RoutingURLs.NOT_FOUND);
+    }
   }
 
   ngOnInit() {

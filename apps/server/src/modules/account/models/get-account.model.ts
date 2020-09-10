@@ -15,4 +15,5 @@ interface Company {
   companyName: string;
   email: string;
   vcsId: number;
+  logoUrl: string;
 }

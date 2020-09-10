@@ -1,10 +1,7 @@
 import { Injectable } from '@angular/core';
 import {
   Router,
-  UrlTree,
   CanActivate,
-  RouterStateSnapshot,
-  ActivatedRouteSnapshot
 } from '@angular/router';
 
 import { Observable, of } from 'rxjs';
@@ -21,16 +18,18 @@ export class AccountResolverGuard implements CanActivate {
     private readonly accountService: AccountService
   ) {}
 
-  canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<boolean | UrlTree> | boolean | UrlTree {
-    return this.accountService.getOrFetchAccountOnce().pipe(
-      catchError(() => of(false)),
-      map(account => {
-        if (account) {
-          return this.router.parseUrl(RoutingURLs.REPOSITORIES);
-        }
+  canActivate(): Observable<boolean> | boolean {
+    return this.accountService.getOrFetchAccountOnce()
+      .pipe(
+        catchError(() => of (false)),
+        map(account => {
+          if (account) {
+            return true;
+          }
 
-        return true;
-      })
-    );
+          this.router.navigate([RoutingURLs.AUTH_LOGIN]);
+          return false;
+        })
+      );
   }
 }

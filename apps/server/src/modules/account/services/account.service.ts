@@ -46,7 +46,8 @@ export class AccountService {
         userName,
         VcsServicesNames.GITHUB,
         accessToken
-      ).then(companies => companies.data.reduce((pv, cv, index, array) => {
+      ).then(companies => companies.data.reduce((pv, cv, index, array) =>
+      {
         if (index + 1 === array.length) {
            return `cm.vcsId = ${cv.id} AND cm.companyName = '${cv.login}'`;
         }
@@ -143,7 +144,7 @@ export class AccountService {
         'account.id',
         'account.uuid',
         'account.name',
-        'account.userName',
+        'account.username',
         'account.email',
         'account.role',
         'account.vcsId',
@@ -153,7 +154,8 @@ export class AccountService {
         'company.uuid',
         'company.companyName',
         'company.vcsId',
-        'company.email'
+        'company.email',
+        'company.logoUrl'
       ])
       .getOne()
       .then(account => {
@@ -161,7 +163,8 @@ export class AccountService {
           uuid: accountCompanyObj.company.uuid,
           companyName: accountCompanyObj.company.companyName,
           email: accountCompanyObj.company.email,
-          vcsId: +accountCompanyObj.company.vcsId
+          vcsId: +accountCompanyObj.company.vcsId,
+          logoUrl: accountCompanyObj.company.logoUrl
         }));
 
         return {

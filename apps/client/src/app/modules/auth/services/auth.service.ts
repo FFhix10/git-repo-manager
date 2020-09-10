@@ -8,6 +8,7 @@ import { LocalStorageService } from '../../../../shared/services/local-storage.s
 import { StoreService } from '../../../../shared/services/store.service';
 import { RoutingURLs } from '../../core/constants';
 import { FreshTokens } from '../../core/models';
+import { AccountStore } from '../states/account';
 
 @Injectable()
 export class AuthService implements ErrorHandler {
@@ -18,7 +19,8 @@ export class AuthService implements ErrorHandler {
     private readonly notificationService: NotificationService,
     private readonly store: StoreService,
     private readonly lsService: LocalStorageService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly accountStore: AccountStore
   ) {  }
 
   public authenticateUser(url: string) {
@@ -44,7 +46,10 @@ export class AuthService implements ErrorHandler {
   }
 
   public logout() {
-    this.lsService.clear();
+    this.lsService.removeItem('access_token');
+    this.lsService.removeItem('expires_at');
+    this.lsService.removeItem('vcs_service');
+    this.accountStore.reset();
     this.router.navigate([RoutingURLs.APP_ROOT]);
   }
 

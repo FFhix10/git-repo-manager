@@ -30,7 +30,6 @@ export class AccountService {
         if (!accountFromStore.uuid) {
           return this.fetchAccount().pipe(
             filter(account => !!account.uuid),
-            tap(account => (console.log(account))),
             switchMap(() => this.accountQuery.account$)
           );
         }

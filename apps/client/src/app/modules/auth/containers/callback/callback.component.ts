@@ -21,7 +21,7 @@ export class CallbackComponent {
 
     try {
       this.authService.parseFreshTokens(tokens as FreshTokens);
-      this.router.navigateByUrl(RoutingURLs.REPOSITORIES);
+      this.router.navigateByUrl(RoutingURLs.COMPANIES_LIST);
     } catch (e) {
       this.router.navigateByUrl(RoutingURLs.AUTH_LOGIN);
     }

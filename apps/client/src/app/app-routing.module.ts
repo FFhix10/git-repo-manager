@@ -15,14 +15,27 @@ export const appRoutes: Routes = [
     loadChildren: './modules/auth/auth.module#AuthModule'
   },
   {
-    path: 'repositories',
-    // canActivate: [ AccountResolverGuard ],
+    path: 'companies',
+    canActivate: [ AccountResolverGuard ],
+    loadChildren: './modules/company/company.module#CompanyModule'
+  },
+  {
+    path: 'companies/:uuid/repositories',
+    canActivate: [AccountResolverGuard],
     loadChildren: './modules/company-projects/company-projects.module#CompanyProjectsModule'
   },
   {
     path: 'repositories/:repository',
     // canActivate: [ AuthGuard, RepositoryDetailsGuard ],
     loadChildren: './modules/repository-details/repository-details.module#RepositoryDetailsModule'
+  },
+  {
+    path: '**',
+    redirectTo: '404'
+  },
+  {
+    path: '404',
+    loadChildren: './modules/+not-found/not-found.module#NotFoundModule'
   }
 ];
 
