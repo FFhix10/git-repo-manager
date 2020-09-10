@@ -3,8 +3,8 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, OneToOne, Generated,
 import { AccessTokensEntity } from './access-tokens.entity';
 import { AvailableDependenciesEntity } from '../../dependencies/entities/available-dependencies.entity';
 import { BranchesEntity } from '../../auth/entities/branches.entity';
-import { CompanyEntity } from '../../company/entities';
 import { RepositoriesEntity } from '../../repositories/entities';
+import { AccountCompanyEntity } from './account-company.entity';
 
 @Entity('account')
 export class AccountEntity {
@@ -30,21 +30,17 @@ export class AccountEntity {
   @Column({ type: 'enum', enum: ['member', 'owner'], default: 'member' })
   role: 'member' | 'owner';
 
-  @Column({ type: 'int', nullable: false })
-  companyId: number;
-
   @OneToMany(() => AvailableDependenciesEntity, data => data.addedBy)
   availableDependency: AvailableDependenciesEntity;
 
   @OneToMany(() => BranchesEntity, data => data.addedBy)
   branches: BranchesEntity;
 
-  @ManyToOne(() => CompanyEntity, data => data.account)
-  @JoinColumn()
-  company: CompanyEntity;
-
   @OneToMany(() => RepositoriesEntity, data => data.account)
   repository: RepositoriesEntity;
+
+  @OneToMany(() => AccountCompanyEntity, data => data.account)
+  accountCompany: AccountCompanyEntity[];
 
   @OneToOne(() => AccessTokensEntity, data => data.account)
   accessToken: AccessTokensEntity;

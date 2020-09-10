@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { tap } from 'rxjs/operators';
+
 import { RoutingURLs } from './modules/core/constants';
-import { AccountService } from './modules/auth/services';
+import { Account } from './modules/core/models';
+import { AccountService } from './modules/auth/states/account';
 import { LocalStorageService } from '../shared/services/local-storage.service';
 
 @Component({
@@ -11,18 +14,25 @@ import { LocalStorageService } from '../shared/services/local-storage.service';
 })
 
 export class AppComponent {
+  private account: Account;
+
   constructor(
     private readonly router: Router,
-    private readonly accountService: AccountService,
-    private readonly lsService: LocalStorageService
+    private readonly accountService: AccountService
   ) {
-    try {
-      const accessToken = this.lsService.getItem('access_token');
-      this.accountService.getAccountData(accessToken);
+    this.accountService.getOrFetchAccountOnce()
+      .pipe(tap(account => this.account = account))
+      .subscribe(
+        () => {
+          if (this.account) {
+            return this.router.navigateByUrl(RoutingURLs.COMPANIES_LIST);
+          }
 
-      this.router.navigateByUrl(RoutingURLs.AUTH_LOGIN);
-    } catch (e) {
-      this.router.navigateByUrl(RoutingURLs.AUTH_LOGIN);
-    }
+          return this.router.navigateByUrl(RoutingURLs.AUTH_LOGIN);
+        },
+        () => {
+          this.router.navigateByUrl(RoutingURLs.AUTH_LOGIN);
+        }
+      );
   }
 }

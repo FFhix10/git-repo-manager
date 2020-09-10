@@ -1,0 +1,23 @@
+<div class="container d-flex flex-column justify-content-center align-items-center">
+  <div class="list-body d-flex flex-column justify-content-center align-items-center">
+    <div class="list-header">
+      <h3>Select the company whose repositories data you want to view</h3>
+    </div>
+
+    <div *ngIf="companies$ | async as companies">
+      <div
+        class="company-btn company-btn-{{vcsService}} d-flex justify-content-center align-self-center"
+        *ngFor="let company of companies"
+        (click)="navigateToRepositories(company.uuid, company.vcsId)"
+      >
+        <div class="company-logo">
+          <img src="{{company.logoUrl}}" alt="{{company.companyName}}" />
+        </div>
+
+        <div class="company-btn-text d-flex flex-column justify-content-center align-items-center">
+          <p>{{ company.companyName }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

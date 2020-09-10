@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { ACCOUNT_ENTITIES } from './entities';
 import { ACCOUNT_SERVICES } from './services';
+import { ACCOUNT_CONTROLLERS } from './controllers';
 
 const MODULES = [
   HttpModule,
@@ -10,7 +11,7 @@ const MODULES = [
 ];
 
 @Module({
-  controllers: [],
+  controllers: ACCOUNT_CONTROLLERS,
   imports: MODULES,
   providers: ACCOUNT_SERVICES
 })

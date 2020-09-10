@@ -10,6 +10,7 @@ import { CompanyModule } from './modules/company/company.module';
 import { DependenciesModule } from './modules/dependencies/dependencies.module';
 import { RepositoriesModule } from './modules/repositories/repositories.module';
 import { SharedModule } from './modules/shared/shared.module';
+import { VcsServicesModule } from './modules/vcs-services/vcs-services.module';
 
 const MODULES = [
   AccountModule,
@@ -18,6 +19,7 @@ const MODULES = [
   CompanyModule,
   RepositoriesModule,
   DependenciesModule,
+  VcsServicesModule,
   SharedModule,
   TypeOrmModule.forRoot()
 ];

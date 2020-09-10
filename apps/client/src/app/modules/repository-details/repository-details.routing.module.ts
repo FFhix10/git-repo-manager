@@ -5,7 +5,7 @@ import { RepositoryDetailsComponent } from './template/repository-details.compon
 
 export const repositoryDetailsRoutes: Routes = [
   {
-    path: 'repositories/:repository',
+    path: '',
     component: RepositoryDetailsComponent
   }
 ];

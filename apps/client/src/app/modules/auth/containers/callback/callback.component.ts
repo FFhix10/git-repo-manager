@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthService } from '../../services';
-import { LocalStorageService } from '../../../../../shared/services/local-storage.service';
 import { RoutingURLs } from '../../../core/constants';
+import { FreshTokens } from '../../../core/models';
 
 @Component({
   selector: 'callback',
@@ -15,18 +15,13 @@ export class CallbackComponent {
   constructor(
     private readonly router: Router,
     private readonly authService: AuthService,
-    private readonly activatedRoute: ActivatedRoute,
-    private readonly lsService: LocalStorageService
+    private readonly activatedRoute: ActivatedRoute
   ) {
     const tokens = this.activatedRoute.snapshot.queryParams;
 
     try {
-      const { accessToken, expiresAt } = tokens;
-
-      this.lsService.setItem('access_token', accessToken);
-      this.lsService.setItem('expires_at', expiresAt);
-
-      this.router.navigateByUrl(RoutingURLs.REPOSITORIES);
+      this.authService.parseFreshTokens(tokens as FreshTokens);
+      this.router.navigateByUrl(RoutingURLs.COMPANIES_LIST);
     } catch (e) {
       this.router.navigateByUrl(RoutingURLs.AUTH_LOGIN);
     }

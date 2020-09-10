@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, ManyToOne, JoinColumn, OneToMan
 
 import { AccountEntity } from '../../account/entities/account.entity';
 import { CompanyEntity } from '../../company/entities/company.entity';
-import { VcsServicesEntity } from './vcs-services.entity';
+import { VcsServicesEntity } from '../../vcs-services/entities/vcs-services.entity';
 import { RepositoriesEntity } from '../../repositories/entities/repositories.entity';
 import { UpdatedDependenciesEntity } from '../../dependencies/entities/updated-dependencies.entity';
 

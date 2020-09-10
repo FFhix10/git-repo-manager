@@ -2,7 +2,7 @@ import { Entity, Column, PrimaryGeneratedColumn, OneToOne, JoinColumn } from 'ty
 
 import { AccountEntity } from './account.entity';
 import { CompanyEntity } from '../../company/entities/company.entity';
-import { VcsServicesEntity } from '../../auth/entities/vcs-services.entity';
+import { VcsServicesEntity } from '../../vcs-services/entities/vcs-services.entity';
 
 @Entity('accessTokens')
 export class AccessTokensEntity {

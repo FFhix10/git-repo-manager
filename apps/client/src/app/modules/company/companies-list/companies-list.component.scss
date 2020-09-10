@@ -1,0 +1,80 @@
+@import '../../../../assets/scss/imports';
+
+.container {
+  height: 100vh;
+}
+
+.company {
+  &-btn {
+    border: 2px solid $color-grey;
+    border-radius: $gap-xs;
+    width: 400px;
+    height: $gap-lg * 2;
+    margin-bottom: $gap-md;
+    position: relative;
+    display: block;
+    user-select: none;
+
+    &-text {
+      padding-left: 10px;
+      padding-right: 10px;
+      font-size: $gap-md*1.2;
+      color: $color-grey;
+
+      p {
+        margin: 0;
+        @include transition(.33s);
+      }
+    }
+
+    &-github {
+      &:hover {
+        border: 2px solid $github-gray-600;
+        cursor: pointer;
+
+        .company-btn-text {
+          color: $github-gray-600;
+        }
+      }
+      @include transition(.33s);
+    }
+
+    &-gitlab {
+      &:hover {
+        border: 2px solid $gitlab-gray-600;
+        cursor: pointer;
+
+        .company-btn-text {
+          color: $gitlab-gray-600;
+        }
+      }
+    }
+
+    @include transition(.33s);
+  }
+
+  &-logo {
+    img {
+      width: 40px;
+      height: 40px;
+    }
+    clip-path: circle(50% at 50% 50%);
+    left: $gap-lg;
+    position: absolute;
+  }
+}
+
+.list {
+  &-body {
+    width: 500px;
+    max-width: 500px;
+    border-radius: 10px;
+    background-color: $color-light-gray;
+    text-align: center;
+  }
+
+  &-header {
+    margin-bottom: $gap-xlg;
+  }
+}
+
