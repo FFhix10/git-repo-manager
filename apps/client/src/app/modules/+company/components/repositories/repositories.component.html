@@ -1,0 +1,12 @@
+<header [lastUpdate]="(date - 1000000) | timestamp"
+        [dataSource]="'github'" [userData]="{}"></header>
+
+<div class="container">
+  <h1>Repositories</h1>
+
+  <div class="d-flex flex-column justify-content-center align-items-center" *ngIf="company$ | async as company">
+    <div class="d-flex flex-column" *ngFor="let availableDependency of company.availableDependency">
+      {{ availableDependency.name }}: {{ availableDependency.minVersion }}
+    </div>
+  </div>
+</div>

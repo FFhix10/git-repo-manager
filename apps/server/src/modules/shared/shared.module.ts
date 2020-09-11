@@ -5,6 +5,7 @@ import { SHARED_SERVICES } from './services';
 import { CompanyEntity } from '../company/entities';
 import { AvailableDependenciesEntity, UpdatedDependenciesEntity } from '../dependencies/entities';
 import { RepositoriesEntity } from '../repositories/entities';
+import { VcsServicesEntity } from '../vcs-services/entities';
 
 const MODULES = [
   HttpModule,
@@ -12,7 +13,8 @@ const MODULES = [
     CompanyEntity,
     AvailableDependenciesEntity,
     UpdatedDependenciesEntity,
-    RepositoriesEntity
+    RepositoriesEntity,
+    VcsServicesEntity
   ])
 ];
 

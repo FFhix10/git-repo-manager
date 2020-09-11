@@ -95,6 +95,8 @@
     "karma-jasmine-html-reporter": "1.4.0",
     "nodemon": "1.18.3",
     "prettier": "1.14.2",
+    "primeicons": "4.0.0",
+    "primeng": "10.0.0",
     "protractor": "5.4.0",
     "supertest": "3.1.0",
     "ts-loader": "4.4.2",

@@ -17,12 +17,16 @@ export const appRoutes: Routes = [
   {
     path: 'companies',
     canActivate: [ AccountResolverGuard ],
-    loadChildren: './modules/company/company.module#CompanyModule'
-  },
-  {
-    path: 'companies/:uuid/repositories',
-    canActivate: [AccountResolverGuard],
-    loadChildren: './modules/company-projects/company-projects.module#CompanyProjectsModule'
+    children: [
+      {
+        path: '',
+        loadChildren: './modules/+company/company.module#CompanyModule'
+      },
+      {
+        path: ':uuid/repositories',
+        loadChildren: './modules/+company/company.module#CompanyModule'
+      }
+    ]
   },
   {
     path: 'repositories/:repository',

@@ -1,12 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { CompaniesListComponent } from './companies-list/companies-list.component';
+import { CompaniesListComponent, CompanyRepositoriesComponent } from './components';
 
 const routes: Routes = [
   {
     path: '',
     component: CompaniesListComponent
+  },
+  {
+    path: ':uuid/repositories',
+    component: CompanyRepositoriesComponent
   }
 ];
 

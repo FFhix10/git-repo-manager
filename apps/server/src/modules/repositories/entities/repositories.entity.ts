@@ -39,7 +39,7 @@ export class RepositoriesEntity {
   branch: BranchesEntity;
 
   @OneToMany(() => UpdatedDependenciesEntity, data => data.repository)
-  updatedDependency: UpdatedDependenciesEntity;
+  updatedDependency: UpdatedDependenciesEntity[];
 
   @ManyToOne(() => CompanyEntity, data => data.repository)
   @JoinColumn()

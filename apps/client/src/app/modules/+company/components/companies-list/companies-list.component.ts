@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AccountQuery } from '../../auth/states/account';
-import { LocalStorageService } from '../../../../shared/services/local-storage.service';
+import { AccountQuery } from '../../../auth/states/account';
 
 @Component({
   selector: 'companies-list',
@@ -12,12 +11,10 @@ import { LocalStorageService } from '../../../../shared/services/local-storage.s
 
 export class CompaniesListComponent {
   companies$ = this.accountQuery.accountCompanies$;
-  readonly vcsService = this.lsService.getItem('vcs_service');
 
   constructor(
-    private readonly accountQuery: AccountQuery,
-    private readonly lsService: LocalStorageService,
-    private readonly router: Router
+    private readonly router: Router,
+    private readonly accountQuery: AccountQuery
   ) {}
 
   navigateToRepositories(uuid: string, vcsId: number): void {
