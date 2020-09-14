@@ -1,8 +1,9 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Subscription } from 'rxjs';
 import { filter, tap } from 'rxjs/operators';
+import { Table } from 'primeng/table';
 
 import { CompanyQuery, CompanyService } from '../../states/company';
 import { LoadingSpinnerService } from '../../../core/services';
@@ -13,8 +14,11 @@ import { LoadingSpinnerService } from '../../../core/services';
   styleUrls: ['./repositories.component.scss']
 })
 export class CompanyRepositoriesComponent implements OnDestroy {
+  @ViewChild('dt', { static: true }) table: Table;
+
   date = Date.now();
   company$ = this.companyQuery.company$;
+  availableDependencies$ = this.companyQuery.availableDependencies$;
   private readonly internalSubscriptions = new Subscription();
 
   constructor(

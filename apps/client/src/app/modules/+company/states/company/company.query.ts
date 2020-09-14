@@ -9,6 +9,7 @@ import { CompanyWithRepositories } from '../../../core/models';
 export class CompanyQuery extends Query<CompanyWithRepositories> {
   company$ = this.select();
   repositories$ = this.select('repositories');
+  availableDependencies$ = this.select('availableDependency');
 
   constructor(protected readonly store: CompanyStore) {
     super(store);

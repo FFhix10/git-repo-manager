@@ -129,6 +129,7 @@ export class CompanyService {
         'repositories.isCompanyRepository',
 
         'availableDependencies.name',
+        'availableDependencies.isRequired',
         'availableDependencies.minVersion',
 
         'updatedDependencies.name',

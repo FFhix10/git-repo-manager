@@ -8,6 +8,7 @@ export interface CompanyWithRepositories {
   logoUrl: string;
   availableDependency: {
     name: string;
+    isRequired: boolean;
     minVersion: string;
   }[];
   repositories: RepositoriesForMainPage[];

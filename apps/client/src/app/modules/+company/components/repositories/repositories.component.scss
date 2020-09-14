@@ -1,0 +1,23 @@
+.table {
+  &-header {
+    text-align: center;
+  }
+
+  &-body {
+    text-align: center;
+  }
+}
+
+.header {
+  &-column {}
+}
+
+.body {
+  &-column {
+    max-width: 100px;
+    width: 100px;
+    white-space: nowrap;
+    overflow-x: hidden;
+    text-overflow: ellipsis;
+  }
+}
