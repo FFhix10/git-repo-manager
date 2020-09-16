@@ -1,3 +1,5 @@
+@import '../../../../../assets/scss/imports';
+
 .table {
   &-header {
     text-align: center;
@@ -16,8 +18,28 @@
   &-column {
     max-width: 100px;
     width: 100px;
+    height: content-box;
     white-space: nowrap;
     overflow-x: hidden;
     text-overflow: ellipsis;
   }
+}
+
+.bg {
+  &-github-danger {
+    background-color: $github-red-700;
+    color: white;
+  }
+}
+
+.public {
+  background-color: $github-blue-700;
+  color: $color-white;
+  font-weight: 600;
+}
+
+.private {
+  background-color: $github-gray-700;
+  color: $color-white;
+  font-weight: 600;
 }

@@ -1,0 +1,11 @@
+@import '../../../../../assets/scss/imports';
+
+.dynamic-row {
+  display: block;
+  position: relative;
+  height: inherit;
+  width: inherit;
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
+

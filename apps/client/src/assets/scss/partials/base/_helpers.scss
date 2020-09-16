@@ -1,0 +1,10 @@
+@import './variables';
+@import './functions';
+
+.text {
+  &-github-danger {
+    color: $github-red-600;
+    font-size: $gap-md;
+    font-weight: 600;
+  }
+}

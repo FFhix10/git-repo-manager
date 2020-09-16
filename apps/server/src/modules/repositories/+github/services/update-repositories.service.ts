@@ -31,7 +31,7 @@ export class UpdateGitHubRepositoriesService {
           this.getBranchDataFromGitHub(
             repository.id,
             repository.branches.base.id,
-            repository.branches.compare.httpRequests,
+            repository.branches.base.httpRequests,
             company.availableDependencies,
           ),
           this.getBranchDataFromGitHub(

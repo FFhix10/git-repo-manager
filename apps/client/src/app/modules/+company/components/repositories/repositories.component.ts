@@ -6,7 +6,7 @@ import { filter, tap } from 'rxjs/operators';
 import { Table } from 'primeng/table';
 
 import { CompanyQuery, CompanyService } from '../../states/company';
-import { LoadingSpinnerService } from '../../../core/services';
+import { LoadingSpinnerService, SetCssClassesService } from '../../../core/services';
 
 @Component({
   selector: 'company-repositories',
@@ -25,7 +25,8 @@ export class CompanyRepositoriesComponent implements OnDestroy {
     private route: ActivatedRoute,
     private readonly companyQuery: CompanyQuery,
     private readonly companyService: CompanyService,
-    private readonly loadingSpinnerService: LoadingSpinnerService
+    private readonly loadingSpinnerService: LoadingSpinnerService,
+    private readonly setCssClassesService: SetCssClassesService
   ) {
     this.loadingSpinnerService.show();
 
@@ -44,5 +45,9 @@ export class CompanyRepositoriesComponent implements OnDestroy {
 
   ngOnDestroy(): void {
     this.internalSubscriptions.unsubscribe();
+  }
+
+  trackByFn(index: number): number {
+    return index;
   }
 }

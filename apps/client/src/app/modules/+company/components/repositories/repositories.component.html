@@ -37,23 +37,24 @@
       </th>
     </tr>
 
-    <tr class="table-body" *ngFor="let repository of company.repositories">
+    <tr class="table-body" *ngFor="let repository of company.repositories; index as i; trackBy: trackByFn">
       <td class="body-column">
         {{ repository.name }}
       </td>
 
-      <td class="body-column">
+      <td id="branchesColumn{{i}}" class="body-column">
         <branches
           [baseBranchData]="repository.baseBranchDependencies || null"
           [compareBranchData]="repository.compareBranchDependencies || null">
         </branches>
       </td>
 
-      <td class="body-column">{{ repository.isPrivate ? 'Private' : 'Public' }}</td>
+      <td class="body-column" ngClass="{{ repository.isPrivate ? 'private' : 'public' }}">{{ repository.isPrivate ? 'Private' : 'Public' }}</td>
 
       <td class="body-column" *ngFor="let data of company.availableDependency">
         <dynamic-row-value
           [dependency]="data.name"
+          [isRequired]="data.isRequired"
           [minVersion]="data.minVersion"
           [baseBranchData]="repository.baseBranchDependencies"
           [compareBranchData]="repository.compareBranchDependencies">
