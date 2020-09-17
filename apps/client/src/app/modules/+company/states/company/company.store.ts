@@ -4,7 +4,7 @@ import { Store, StoreConfig } from '@datorama/akita';
 import { CompanyWithRepositories, RepositoriesForMainPage } from '../../../core/models';
 
 @Injectable({ providedIn: 'root' })
-@StoreConfig({ name: 'company', resettable: true })
+@StoreConfig({ name: 'company', resettable: true, idKey: 'name' })
 export class CompanyStore extends Store<CompanyWithRepositories>{
   constructor() {
     const init: CompanyWithRepositories = {

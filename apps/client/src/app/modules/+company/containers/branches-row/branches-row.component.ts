@@ -28,7 +28,7 @@ export class BranchesRowComponent implements OnInit {
   ngOnInit(): void {
     if (!this.baseBranchData.length) {
       const compareBranch: DependencyForMainPage = Object.assign({}, ...this.compareBranchData);
-      this.dynamicClassName = `text-${this.vcsService}-danger`;
+      this.dynamicClassName = `label-danger label-danger-${this.vcsService}`;
       this.branches = compareBranch.branchName;
 
       return;
@@ -36,7 +36,7 @@ export class BranchesRowComponent implements OnInit {
 
     if (!this.compareBranchData.length) {
       const baseBranch: DependencyForMainPage = Object.assign({}, ...this.baseBranchData);
-      this.dynamicClassName = `text-${this.vcsService}-danger`;
+      this.dynamicClassName = `label-danger label-danger-${this.vcsService}`;
       this.branches = baseBranch.branchName;
 
       return;

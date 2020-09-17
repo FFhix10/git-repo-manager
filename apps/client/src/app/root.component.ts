@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
+import { SettingsService } from '../shared/settings/states/settings.service';
 
 @Component({
   selector: 'app-root',
@@ -9,4 +11,11 @@ import { Component } from '@angular/core';
   `
 })
 
-export class RootComponent {}
+export class RootComponent implements OnInit {
+
+  constructor(private readonly settingsService: SettingsService) {}
+
+  ngOnInit(): void {
+    this.settingsService.getSettings();
+  }
+}

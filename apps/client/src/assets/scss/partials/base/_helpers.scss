@@ -8,3 +8,28 @@
     font-weight: 600;
   }
 }
+
+.public,
+.private,
+.label-danger {
+  padding: 5px 10px;
+  border-radius: $gap-xs;
+  color: $color-white;
+  font-weight: 100;
+}
+
+.label {
+  &-danger {
+    &-github {
+      background-color: $github-red-700;
+    }
+  }
+}
+
+.public {
+  background-color: $github-blue-700;
+}
+
+.private {
+  background-color: $github-gray-700;
+}

@@ -11,6 +11,7 @@ import { DependenciesModule } from './modules/dependencies/dependencies.module';
 import { RepositoriesModule } from './modules/repositories/repositories.module';
 import { SharedModule } from './modules/shared/shared.module';
 import { VcsServicesModule } from './modules/vcs-services/vcs-services.module';
+import { SettingsModule } from './modules/settings/settings.module';
 
 const MODULES = [
   AccountModule,
@@ -20,6 +21,7 @@ const MODULES = [
   RepositoriesModule,
   DependenciesModule,
   VcsServicesModule,
+  SettingsModule,
   SharedModule,
   TypeOrmModule.forRoot()
 ];

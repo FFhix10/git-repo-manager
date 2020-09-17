@@ -7,6 +7,7 @@ import { Table } from 'primeng/table';
 
 import { CompanyQuery, CompanyService } from '../../states/company';
 import { LoadingSpinnerService, SetCssClassesService } from '../../../core/services';
+import { SettingsQuery } from '../../../../../shared/settings/states/settings.query';
 
 @Component({
   selector: 'company-repositories',
@@ -26,8 +27,10 @@ export class CompanyRepositoriesComponent implements OnDestroy {
     private readonly companyQuery: CompanyQuery,
     private readonly companyService: CompanyService,
     private readonly loadingSpinnerService: LoadingSpinnerService,
-    private readonly setCssClassesService: SetCssClassesService
+    private readonly setCssClassesService: SetCssClassesService,
+    private readonly settingsQuery: SettingsQuery
   ) {
+
     this.loadingSpinnerService.show();
 
     const { vcsId } = this.route.snapshot.queryParams;

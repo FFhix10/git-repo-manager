@@ -28,7 +28,7 @@ export class DynamicRowValueComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let notAvailableClass = this.isRequired ? `text-${this.vcsService}-danger` : '';
+    let notAvailableClass = this.isRequired ? `label-danger label-danger-${this.vcsService}` : '';
     let compareVersionClass = '';
     if (!this.baseBranchData || !this.baseBranchData.length) {
       const compareBranchDependency = this.compareBranchData.find(item => item.name === this.dependency);

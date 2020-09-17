@@ -38,9 +38,7 @@
     </tr>
 
     <tr class="table-body" *ngFor="let repository of company.repositories; index as i; trackBy: trackByFn">
-      <td class="body-column">
-        {{ repository.name }}
-      </td>
+      <td class="body-column" [innerText]="repository.name"></td>
 
       <td id="branchesColumn{{i}}" class="body-column">
         <branches
@@ -49,7 +47,12 @@
         </branches>
       </td>
 
-      <td class="body-column" ngClass="{{ repository.isPrivate ? 'private' : 'public' }}">{{ repository.isPrivate ? 'Private' : 'Public' }}</td>
+      <td class="body-column">
+        <span
+          ngClass="{{ repository.isPrivate ? 'private' : 'public' }}"
+          [innerText]="repository.isPrivate ? 'Private' : 'Public'">
+        </span>
+      </td>
 
       <td class="body-column" *ngFor="let data of company.availableDependency">
         <dynamic-row-value
