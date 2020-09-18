@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { HashMap, QueryEntity } from '@datorama/akita';
+import { QueryEntity } from '@datorama/akita';
 
 import { SettingsStore } from './settings.store';
 import { SettingsState } from './settings.state';
-import { Settings } from '../models';
+import { Settings, SettingsNames } from '../models';
 
 @Injectable({ providedIn: 'root' })
 export class SettingsQuery extends QueryEntity<SettingsState> {
@@ -15,7 +15,11 @@ export class SettingsQuery extends QueryEntity<SettingsState> {
     super(settingsStore);
   }
 
-  getSetting(name: string): Observable<Settings> {
+  settingSnapshot(name: SettingsNames): Settings {
+    return this.getEntity(name);
+  }
+
+  getSetting(name: SettingsNames): Observable<Settings> {
     return this.selectEntity(name);
   }
 }

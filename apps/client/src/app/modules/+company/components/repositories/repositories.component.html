@@ -1,68 +1,81 @@
 <header [lastUpdate]="(date - 1000000) | timestamp"
         [dataSource]="'github'" [userData]="{}"></header>
 
-<div class="d-flex flex-column justify-content-center align-items-center" *ngIf="company$ | async as company">
-  <table class="table">
-    <tr class="table-header">
-      <th class="header-column">
-        <dynamic-header-value
-          [name]="'repository name'"
-          [isRequired]="false"
-          [minVersion]="null">
-        </dynamic-header-value>
-      </th>
+<ng-container *ngIf="company$ | async as company">
+  <div *ngIf="availableDependencies$ | async as availableDependencies">
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <table class="table">
+        <tr class="table-header">
+          <th class="header-column">
+            <dynamic-header-value
+              [name]="'repository name'"
+              [isRequired]="false"
+              [minVersion]="null">
+            </dynamic-header-value>
+          </th>
 
-      <th class="header-column">
-        <dynamic-header-value
-          [name]="'branches'"
-          [isRequired]="false"
-          [minVersion]="null">
-        </dynamic-header-value>
-      </th>
+          <th class="header-column">
+            <dynamic-header-value
+              [name]="'branches'"
+              [isRequired]="false"
+              [minVersion]="null">
+            </dynamic-header-value>
+          </th>
 
-      <th class="header-column">
-        <dynamic-header-value
-          [name]="'type of privacy'"
-          [isRequired]="false"
-          [minVersion]="null">
-        </dynamic-header-value>
-      </th>
+          <th class="header-column">
+            <dynamic-header-value
+              [name]="'type of privacy'"
+              [isRequired]="false"
+              [minVersion]="null">
+            </dynamic-header-value>
+          </th>
 
-      <th class="header-column" *ngFor="let data of company.availableDependency">
-        <dynamic-header-value
-          [name]="data.name"
-          [isRequired]="data.isRequired"
-          [minVersion]="data.minVersion">
-        </dynamic-header-value>
-      </th>
-    </tr>
+          <th class="header-column" *ngFor="let data of availableDependencies">
+            <dynamic-header-value
+              [name]="data.name"
+              [isRequired]="data.isRequired"
+              [minVersion]="data.minVersion">
+            </dynamic-header-value>
+          </th>
+        </tr>
 
-    <tr class="table-body" *ngFor="let repository of company.repositories; index as i; trackBy: trackByFn">
-      <td class="body-column" [innerText]="repository.name"></td>
+        <tr class="table-body" *ngFor="let repository of repositories; trackBy: trackByFn">
+          <td class="body-column" [innerText]="repository.name"></td>
 
-      <td id="branchesColumn{{i}}" class="body-column">
-        <branches
-          [baseBranchData]="repository.baseBranchDependencies || null"
-          [compareBranchData]="repository.compareBranchDependencies || null">
-        </branches>
-      </td>
+          <td class="body-column">
+            <branches
+              [baseBranchData]="repository.baseBranchDependencies || null"
+              [compareBranchData]="repository.compareBranchDependencies || null">
+            </branches>
+          </td>
 
-      <td class="body-column">
+          <td class="body-column">
         <span
           ngClass="{{ repository.isPrivate ? 'private' : 'public' }}"
           [innerText]="repository.isPrivate ? 'Private' : 'Public'">
         </span>
-      </td>
+          </td>
 
-      <td class="body-column" *ngFor="let data of company.availableDependency">
-        <dynamic-row-value
-          [dependency]="data.name"
-          [isRequired]="data.isRequired"
-          [minVersion]="data.minVersion"
-          [baseBranchData]="repository.baseBranchDependencies"
-          [compareBranchData]="repository.compareBranchDependencies">
-        </dynamic-row-value>
-      </td>
-    </tr>
-  </table>
-</div>
+          <td class="body-column" *ngFor="let data of availableDependencies">
+            <dynamic-row-value
+              [dependency]="data.name"
+              [isRequired]="data.isRequired"
+              [minVersion]="data.minVersion"
+              [baseBranchData]="repository.baseBranchDependencies"
+              [compareBranchData]="repository.compareBranchDependencies">
+            </dynamic-row-value>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+    <div *ngIf="itemsPerPage">
+      <pagination
+        [totalItems]="company.repositories.length"
+        [itemsPerPage]="itemsPerPage.value"
+        [(ngModel)]="currentPage"
+        (pageChanged)="pageChanged($event, company.repositories)"
+      ></pagination>
+    </div>
+  </div>
+</ng-container>

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, OnChanges } from '@angular/core';
 
 import { DependencyForMainPage, RepositoriesForMainPage } from '../../../core/models';
 import { LocalStorageService } from '../../../../../shared/services/local-storage.service';
@@ -8,7 +8,7 @@ import { LocalStorageService } from '../../../../../shared/services/local-storag
   templateUrl: './branches-row.component.html',
   styleUrls: ['./branches-row.component.scss']
 })
-export class BranchesRowComponent implements OnInit {
+export class BranchesRowComponent implements OnChanges {
   branches: string;
   vcsService: string;
   dynamicClassName: string;
@@ -24,12 +24,11 @@ export class BranchesRowComponent implements OnInit {
     }
   }
 
-
-  ngOnInit(): void {
+  ngOnChanges() {
     if (!this.baseBranchData.length) {
       const compareBranch: DependencyForMainPage = Object.assign({}, ...this.compareBranchData);
       this.dynamicClassName = `label-danger label-danger-${this.vcsService}`;
-      this.branches = compareBranch.branchName;
+      this.branches = `<span class="${this.dynamicClassName}">${compareBranch.branchName}</span>`;
 
       return;
     }
@@ -37,7 +36,7 @@ export class BranchesRowComponent implements OnInit {
     if (!this.compareBranchData.length) {
       const baseBranch: DependencyForMainPage = Object.assign({}, ...this.baseBranchData);
       this.dynamicClassName = `label-danger label-danger-${this.vcsService}`;
-      this.branches = baseBranch.branchName;
+      this.branches = `<span class="${this.dynamicClassName}">${baseBranch.branchName}</span>`;
 
       return;
     }

@@ -14,4 +14,8 @@ export class CompanyQuery extends Query<CompanyWithRepositories> {
   constructor(protected readonly store: CompanyStore) {
     super(store);
   }
+
+  companySnapshot(): CompanyWithRepositories {
+    return this.getValue();
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 
 import { DependencyForMainPage } from '../../../core/models';
 import { compareVersions } from '../../../core/functions';
@@ -9,7 +9,7 @@ import { LocalStorageService } from '../../../../../shared/services/local-storag
   templateUrl: './dynamic-row-value.component.html',
   styleUrls: ['./dynamic-row-value.component.scss']
 })
-export class DynamicRowValueComponent implements OnInit {
+export class DynamicRowValueComponent implements OnChanges {
   result: string;
   vcsService: string;
 
@@ -27,7 +27,7 @@ export class DynamicRowValueComponent implements OnInit {
     }
   }
 
-  ngOnInit(): void {
+  ngOnChanges(): void {
     let notAvailableClass = this.isRequired ? `label-danger label-danger-${this.vcsService}` : '';
     let compareVersionClass = '';
     if (!this.baseBranchData || !this.baseBranchData.length) {

@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { TableModule } from 'primeng/table';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
 
 import { CompanyRoutingModule } from './company-routing.module';
 import { COMPANY_COMPONENTS } from './components';
@@ -15,7 +17,10 @@ const COMPANY_MODULES = [
   HeaderModule,
   PipesModule,
   TableModule,
+  FormsModule,
   TooltipModule.forRoot(),
+  PaginationModule.forRoot(),
+  ReactiveFormsModule,
   CompanyRoutingModule
 ];
 
