@@ -10,6 +10,7 @@ import { LoadingSpinnerService } from '../../../core/services';
 import { CompanyWithRepositories, RepositoriesForMainPage } from '../../../core/models';
 import { SettingsQuery } from '../../../../../shared/settings/states';
 import { Settings, SettingsNames } from '../../../../../shared/settings/models';
+import { LocalStorageService } from '../../../../../shared/services/local-storage.service';
 
 @Component({
   selector: 'company-repositories',
@@ -19,7 +20,7 @@ import { Settings, SettingsNames } from '../../../../../shared/settings/models';
 export class CompanyRepositoriesComponent implements OnDestroy {
   @ViewChild('dt', { static: true }) table: Table;
 
-  date = Date.now();
+  date: number;
   currentPage: number;
   company: CompanyWithRepositories;
   repositories: RepositoriesForMainPage[];
@@ -36,7 +37,8 @@ export class CompanyRepositoriesComponent implements OnDestroy {
     private readonly companyQuery: CompanyQuery,
     private readonly companyService: CompanyService,
     private readonly loadingSpinnerService: LoadingSpinnerService,
-    private readonly settingsQuery: SettingsQuery
+    private readonly settingsQuery: SettingsQuery,
+    private readonly lsService: LocalStorageService
   ) {
     this.loadingSpinnerService.show();
 
@@ -48,13 +50,24 @@ export class CompanyRepositoriesComponent implements OnDestroy {
           this.company = this.companyQuery.companySnapshot();
           this.repositories = this.company.repositories.slice(0, +this.itemsPerPage.value);
 
+          const avgDate = this.company.repositories.reduce((pv, cv) => {
+            pv += cv.updatedAt;
+
+            return pv;
+          }, 0);
+
+          this.date = Math.round(avgDate / this.company.repositories.length);
+
           if (page) {
             setTimeout(() => this.currentPage = +page);
+            this.lsService.setItem('page', page);
             this.pageChanged({ page, itemsPerPage: +this.itemsPerPage.value }, this.company.repositories);
           } else {
             setTimeout(() => this.currentPage = 1);
+            this.lsService.setItem('page', 1);
           }
 
+          this.lsService.setItem('vcsId', vcsId);
           this.loadingSpinnerService.hide();
         })
       ).subscribe();
@@ -70,7 +83,16 @@ export class CompanyRepositoriesComponent implements OnDestroy {
     return index;
   }
 
+  navigateToRepositoryDetails(repositoryName: string): void {
+    const { uuid } = this.route.snapshot.params;
+    repositoryName = repositoryName.replace('/', '%');
+
+    this.router.navigate([`/companies/${uuid}/repositories/${repositoryName}`]);
+  }
+
   pageChanged(event: { page: number, itemsPerPage: number }, repositories: RepositoriesForMainPage[]) {
+    this.lsService.updateItem('page', event.page);
+
     this.router.navigate(
       [],
       {

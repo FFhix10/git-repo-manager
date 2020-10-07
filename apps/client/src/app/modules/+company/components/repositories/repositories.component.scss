@@ -31,3 +31,12 @@
     color: white;
   }
 }
+
+.repository-name {
+  @include transition(.3s);
+
+  &:hover {
+    color: $github-blue-600;
+    cursor: pointer;
+  }
+}

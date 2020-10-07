@@ -1,9 +1,9 @@
-<header [lastUpdate]="(date - 1000000) | timestamp"
+<header [lastUpdate]="date | timestamp"
         [dataSource]="'github'" [userData]="{}"></header>
 
 <ng-container *ngIf="company$ | async as company">
-  <div *ngIf="availableDependencies$ | async as availableDependencies">
-    <div class="d-flex flex-column justify-content-center align-items-center">
+  <div class="d-flex flex-column justify-content-center" *ngIf="availableDependencies$ | async as availableDependencies">
+    <div class="">
       <table class="table">
         <tr class="table-header">
           <th class="header-column">
@@ -40,7 +40,7 @@
         </tr>
 
         <tr class="table-body" *ngFor="let repository of repositories; trackBy: trackByFn">
-          <td class="body-column" [innerText]="repository.name"></td>
+          <td class="body-column repository-name" [innerText]="repository.name" (click)="navigateToRepositoryDetails(repository.name)"></td>
 
           <td class="body-column">
             <branches
@@ -69,7 +69,7 @@
       </table>
     </div>
 
-    <div *ngIf="itemsPerPage">
+    <div class="d-flex justify-content-center" *ngIf="itemsPerPage">
       <pagination
         [totalItems]="company.repositories.length"
         [itemsPerPage]="itemsPerPage.value"

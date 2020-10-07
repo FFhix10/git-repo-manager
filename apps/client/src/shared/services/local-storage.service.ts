@@ -22,6 +22,13 @@ export class LocalStorageService {
     this.ls.setItem(key, value);
   }
 
+  public updateItem(key: string, data: any): void {
+    const value = data.toString();
+
+    this.ls.removeItem(key);
+    this.ls.setItem(key, value);
+  }
+
   public removeItem(key: string) {
     this.ls.removeItem(key);
   }

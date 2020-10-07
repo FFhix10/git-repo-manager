@@ -30,7 +30,6 @@
     &-github {
       &:hover {
         border: 2px solid $github-gray-600;
-        cursor: pointer;
 
         .company-btn-text {
           color: $github-gray-600;
@@ -42,7 +41,6 @@
     &-gitlab {
       &:hover {
         border: 2px solid $gitlab-gray-600;
-        cursor: pointer;
 
         .company-btn-text {
           color: $gitlab-gray-600;
@@ -51,6 +49,10 @@
     }
 
     @include transition(.33s);
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 
   &-logo {

@@ -9,3 +9,7 @@ body {
 .container {
   @include make-container($gap-lg);
 }
+
+/*.pagination {
+  background-color: black !important;
+}*/

@@ -1,14 +1,19 @@
 import { Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
 
 import { pick } from 'lodash';
+import { Repository } from 'typeorm';
 
 import { CompaniesToUpdate } from '../models';
 import { DependenciesService } from '../../../dependencies/services';
+import { RepositoriesEntity } from '../../entities';
 
 @Injectable()
 export class UpdateGitHubRepositoriesService {
   constructor(
-    private readonly dependenciesService: DependenciesService
+    private readonly dependenciesService: DependenciesService,
+    @InjectRepository(RepositoriesEntity)
+    private readonly repositoriesRepository: Repository<RepositoriesEntity>
   ) {}
 
   async updateRepositories(companies: CompaniesToUpdate[]) {
@@ -60,6 +65,12 @@ export class UpdateGitHubRepositoriesService {
             await this.dependenciesService.updateDependencies(data);
           }
         }
+
+        await this.repositoriesRepository
+          .update(
+            { id: repository.id },
+            { updatedAt: Date.now() }
+            );
       }
     }
 

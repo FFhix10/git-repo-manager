@@ -126,6 +126,7 @@ export class CompanyService {
 
         'repositories.name',
         'repositories.isPrivate',
+        'repositories.updatedAt',
         'repositories.isCompanyRepository',
 
         'availableDependencies.name',
@@ -164,6 +165,7 @@ export class CompanyService {
           return {
             name: repositoryObj.name,
             isPrivate: repositoryObj.isPrivate,
+            updatedAt: +repositoryObj.updatedAt,
             isCompanyRepository: repositoryObj.isCompanyRepository,
             baseBranchDependencies,
             compareBranchDependencies

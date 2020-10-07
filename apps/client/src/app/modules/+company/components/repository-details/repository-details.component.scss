@@ -1,0 +1,35 @@
+@import '../../../../../assets/scss/imports';
+
+.details-card {
+  margin-top: 50px;
+  border-radius: 5px;
+  width: 1050px;
+/*  box-shadow: 0 0 5px rgba(0,0,0,0.5);*/
+
+  &__header {
+    height: 100px;
+    padding: 0 50px 0 50px;
+    border-bottom: 1px solid $github-gray-300;
+
+    &-text {
+      font-size: $gap-xlg;
+      font-weight: 600;
+    }
+  }
+
+  &__dependencies {
+    height: 100px;
+    padding: 0 50px 0 50px;
+  }
+}
+
+.background {
+  &-github {
+    background: $github-gray-200;
+  }
+}
+
+.public {
+  font-size: $gap-md;
+  margin-right: 5px;
+}

@@ -1,0 +1,19 @@
+<header [lastUpdate]="repository?.updatedAt | timestamp" [dataSource]="vcsService"></header>
+
+<div class="container d-flex justify-content-center">
+  <div class="details-card flex-column background-{{vcsService}}">
+    <div class="details-card__header d-flex justify-content-start align-items-center">
+      <div class="details-card__header-text d-flex flex-row align-items-center">
+        <span
+          [ngClass]="repository?.isPrivate ? 'private' : 'public'"
+          [innerText]="repository?.isPrivate ? 'Private' : 'Public'">
+        </span>
+        {{ repository?.name }}
+      </div>
+    </div>
+
+    <div class="details-card__dependencies">
+
+    </div>
+  </div>
+</div>

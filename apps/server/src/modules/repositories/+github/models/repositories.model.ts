@@ -2,6 +2,7 @@ export interface Repositories {
   id: number;
   name: string;
   isPrivate: boolean;
+  updatedAt: number;
   branches: {};
 }
 

@@ -152,6 +152,7 @@ export class GithubRepositoriesService {
         'repositories.id',
         'repositories.name',
         'repositories.isPrivate',
+        'repositories.updatedAt',
 
         'cm.companyName',
 
@@ -167,6 +168,7 @@ export class GithubRepositoriesService {
           id: repository.id,
           name: repository.name,
           isPrivate: repository.isPrivate,
+          updatedAt: +repository.updatedAt,
           branches: {
             base: {
               name: '',

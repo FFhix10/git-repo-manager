@@ -31,6 +31,9 @@ export class RepositoriesEntity {
   @Column({ type: 'int', nullable: true })
   compareBranchId: number;
 
+  @Column({ type: 'bigint', nullable: false, default: Date.now() })
+  updatedAt: number;
+
   @ManyToOne(() => AccountEntity, data => data.repository)
   @JoinColumn()
   account: AccountEntity;

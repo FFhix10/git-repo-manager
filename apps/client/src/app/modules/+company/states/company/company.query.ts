@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Query } from '@datorama/akita';
 
 import { CompanyStore } from './company.store';
-import { CompanyWithRepositories } from '../../../core/models';
+import { CompanyWithRepositories, RepositoriesForMainPage } from '../../../core/models';
 
 @Injectable({ providedIn: 'root' })
 export class CompanyQuery extends Query<CompanyWithRepositories> {
@@ -17,5 +17,9 @@ export class CompanyQuery extends Query<CompanyWithRepositories> {
 
   companySnapshot(): CompanyWithRepositories {
     return this.getValue();
+  }
+
+  repositorySnapshot(repositoryName: string): RepositoriesForMainPage {
+    return this.companySnapshot().repositories.find(repository => repository.name === repositoryName);
   }
 }
