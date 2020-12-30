@@ -30,7 +30,7 @@
     "@angular/platform-browser-dynamic": "6.1.10",
     "@angular/router": "6.1.10",
     "@nest-middlewares/cookie-session": "5.1.1",
-    "@nestjs/common": "5.4.0",
+    "@nestjs/common": "7.6.5",
     "@nestjs/core": "5.4.0",
     "@nestjs/mongoose": "5.2.2",
     "@nestjs/passport": "5.1.0",
