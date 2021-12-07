@@ -54,7 +54,7 @@
     "passport-github2": "0.1.11",
     "passport-local": "1.0.0",
     "path": "0.12.7",
-    "pm2": "3.5.1",
+    "pm2": "4.4.0",
     "request": "2.88.0",
     "rxjs": "6.3.3",
     "semver": "5.6.0",
@@ -64,7 +64,7 @@
     "zone.js": "0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "0.13.6",
+    "@angular-devkit/build-angular": "0.800.0",
     "@angular/cli": "6.2.4",
     "@angular/compiler-cli": "6.1.10",
     "@angular/language-service": "6.1.10",
