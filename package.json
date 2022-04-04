@@ -16,7 +16,9 @@
     "test:UI": "ng test --code-coverage",
     "test:server": "jest --detectOpenHandles",
     "test:server:cov": "jest --coverage",
-    "getVersion": "npm view"
+    "getVersion": "npm view",
+    "prepublish": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "private": true,
   "dependencies": {
@@ -45,7 +47,7 @@
     "cron": "1.6.0",
     "dotenv": "7.0.0",
     "lite-server": "2.4.0",
-    "lodash": "4.17.11",
+    "lodash": "4.17.20",
     "mongoose": "5.3.12",
     "ngx-bootstrap": "3.2.0",
     "node-cmd": "3.0.0",
@@ -61,7 +63,8 @@
     "shelljs": "0.8.3",
     "short-uuid": "3.1.0",
     "to-array": "0.1.4",
-    "zone.js": "0.8.26"
+    "zone.js": "0.8.26",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.13.6",
@@ -111,5 +114,6 @@
     },
     "coverageDirectory": "./coverage/back-end",
     "testEnvironment": "node"
-  }
+  },
+  "snyk": true
 }
