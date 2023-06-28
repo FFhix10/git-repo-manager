@@ -57,7 +57,7 @@
     "pm2": "3.5.1",
     "request": "2.88.0",
     "rxjs": "6.3.3",
-    "semver": "5.6.0",
+    "semver": "7.5.2",
     "shelljs": "0.8.3",
     "short-uuid": "3.1.0",
     "to-array": "0.1.4",
