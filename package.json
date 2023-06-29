@@ -31,7 +31,7 @@
     "@angular/router": "6.1.10",
     "@nest-middlewares/cookie-session": "5.1.1",
     "@nestjs/common": "5.4.0",
-    "@nestjs/core": "5.4.0",
+    "@nestjs/core": "9.0.5",
     "@nestjs/mongoose": "5.2.2",
     "@nestjs/passport": "5.1.0",
     "@nestjs/websockets": "5.4.0",
